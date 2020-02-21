@@ -12,9 +12,5 @@ block_comment_start = /*
 block_comment = *
 block_comment_end = */
 
-[*.md]
-trim_trailing_whitespace = false
-
-[*.nlf]
-insert_final_newline = false
+[*.{markdown|md}]
 trim_trailing_whitespace = false
