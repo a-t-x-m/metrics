@@ -53,19 +53,19 @@ Instantiates class and adds event listeners, unless [`option.muted`](#muted) is 
 
 #### listen
 
-Usage: `new Metrics(/*...*/).listen()`
+Usage: `listen()`
 
 Manuall add event listener, e.g. for when [`option.muted`](#muted) is `true`
 
 #### mute
 
-Usage: `new Metrics(/*...*/).mute()`
+Usage: `mute()`
 
 Removes event listener
 
 #### event
 
-Usage: `new Metrics(/*...*/).event({ category: string, action: string, label?: string, value?: number})`
+Usage: `event({ category: string, action: string, label?: string, value?: number})`
 
 Sends an event to Google Analystics
 
