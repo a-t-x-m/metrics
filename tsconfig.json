@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "inlineSourceMap": false,
+    "lib": [
+      "dom",
+      "es2020"
+    ],
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "noImplicitAny": false,
+    "outDir": "./lib",
+    "removeComments": false,
+    "rootDir": "./src",
+    "sourceMap": true,
+    "target": "es5",
+    "esModuleInterop": true,
+    "incremental": false
+  },
+  "exclude": [
+    "lib",
+    "node_modules"
+  ]
+}
