@@ -73,15 +73,15 @@ Sends an event to Google Analystics
 
 #### cacheBuster
 
-Type: `boolean`
-Default: `false`
+Type: `boolean`  
+Default: `false`  
 
 Used to send a random number in GET requests to ensure browsers and proxies don't cache hits.
 
 ### muted
 
-Type: `boolean`
-Default: `false`
+Type: `boolean`  
+Default: `false`  
 
 Skips add event listeners when the class is instantiated.
 
