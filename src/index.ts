@@ -2,7 +2,7 @@
 
 import { createHash } from 'crypto';
 import { mac as getMAC } from 'address';
-import { v4 as uuid } from 'uuid'
+import { v4 as uuid } from 'uuid';
 import queryString from 'query-string';
 import { log, error as errorLog } from '@atxmtx/developer-console';
 
@@ -59,7 +59,7 @@ export default class Metrics {
       ...this.defaultParams(),
       ec: category.trim(),
       ea: action.trim()
-    }
+    };
 
     if (label && label.trim().length) {
       urlParams['el'] = label.trim();
@@ -73,7 +73,7 @@ export default class Metrics {
       urlParams['z'] = Math.floor(Math.random() * Date.now());
     }
 
-    this.sendEvent(urlParams)
+    this.sendEvent(urlParams);
   }
 
   private async sendEvent(urlParams) {
