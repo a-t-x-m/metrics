@@ -106,28 +106,28 @@ Sends an event to Google Analystics
 
 #### commandAction
 
-Type: `string | string[]`
+Type: `string | string[]`  
 
 Used to track specified package commands, supports wildcards (e.g. `my-package:*`).
 
 #### commandCategory
 
-Type: `string`
-Default: `Package Command`
+Type: `string`  
+Default: `Package Command`  
 
 Default event category for package commands.
 
 #### cacheBuster
 
-Type: `boolean`
-Default: `false`
+Type: `boolean`  
+Default: `false`  
 
 Used to send a random number in GET requests to ensure browsers and proxies don't cache hits.
 
 ### muted
 
-Type: `boolean`
-Default: `false`
+Type: `boolean`  
+Default: `false`  
 
 Skips add event listeners when the class is instantiated.
 
