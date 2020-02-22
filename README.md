@@ -76,6 +76,8 @@ module.exports =
       ])
 ```
 
+**Note:** Invoking commands from `tool-bar` packages is currently not supported!
+
 ### Methods
 
 #### constructor
@@ -124,12 +126,12 @@ Default: `false`
 
 Used to send a random number in GET requests to ensure browsers and proxies don't cache hits.
 
-### muted
+#### muted
 
 Type: `boolean`  
 Default: `false`  
 
-Skips add event listeners when the class is instantiated.
+Skips adding event listeners when the class is instantiated.
 
 ## License
 
