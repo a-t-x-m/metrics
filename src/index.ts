@@ -1,10 +1,10 @@
 'use strict';
 
 import { createHash } from 'crypto';
+import { log, error as errorLog } from '@atxmtx/developer-console';
 import { mac as getMAC } from 'address';
 import { v4 as uuid } from 'uuid';
 import queryString from 'query-string';
-import { log, error as errorLog } from '@atxmtx/developer-console';
 
 export default class Metrics {
   clientID: string;
