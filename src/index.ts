@@ -5,10 +5,11 @@ import { log, error as errorLog } from '@atxmtx/developer-console';
 import { mac as getMAC } from 'address';
 import { v4 as uuid } from 'uuid';
 import queryString from 'query-string';
+import wildcard from 'wildcard';
 
 export default class Metrics {
   clientID: string;
-  options: MetricsOptions = {};
+  options: MetricsOptions = { commandCategory: 'Package Command' };
   title: string = '@atxmtx/metrics';
   trackingID: string;
 
@@ -19,6 +20,10 @@ export default class Metrics {
 
     if (!options.muted) {
       this.listen();
+    }
+
+    if (options.commandAction?.length) {
+      this.commandListener(options.commandAction);
     }
   }
 
@@ -70,10 +75,25 @@ export default class Metrics {
     }
 
     if (this.options.cacheBuster) {
-      urlParams['z'] = Math.floor(Math.random() * Date.now());
+      urlParams['z'] = Date.now();
     }
 
     this.sendEvent(urlParams);
+  }
+
+  private commandListener(commands) {
+    const filteredCommands = this.getCommands(commands);
+
+    log(`${this.title}: Adding event listener for commands:`, filteredCommands);
+
+    filteredCommands.map(command => {
+      (<any>global).addEventListener(command, () => {
+        this.event({
+          category: this.options.commandCategory,
+          action: command
+        });
+      });
+    });
   }
 
   private async sendEvent(urlParams) {
@@ -100,6 +120,22 @@ export default class Metrics {
       // @ts-ignore
       vp: `${atom.getWindowDimensions().width}x${atom.getWindowDimensions().height}`
     };
+  }
+
+  private getCommands(commands) {
+    commands = typeof commands === 'string' ? [commands] : commands;
+
+    // @ts-ignore
+    const registeredCommands = Object.keys(atom.commands.registeredCommands);
+    const filteredCommands = [];
+
+    commands.forEach(command => {
+      const filtered = wildcard(command, registeredCommands)
+
+      filteredCommands.push(...filtered);
+    });
+
+    return filteredCommands;
   }
 
   private getMacAddress(): string | void {

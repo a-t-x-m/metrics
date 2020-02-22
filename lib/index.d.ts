@@ -8,8 +8,10 @@ export default class Metrics {
     mute(): void;
     event(payload: GoogleEvent): void;
     private handler;
+    private commandListener;
     private sendEvent;
     private defaultParams;
+    private getCommands;
     private getMacAddress;
     private getClientID;
 }

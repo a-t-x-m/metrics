@@ -5,7 +5,7 @@
 [![CircleCI](https://flat.badgen.net/circleci/github/atxmtx/metrics)](https://circleci.com/gh/atxmtx/metrics)
 [![David](https://flat.badgen.net/david/dep/atxmtx/metrics)](https://david-dm.org/atxmtx/metrics)
 
-Sends events to Google Analytics from within Atom
+Google Analytics event tracking for Atom packages
 
 ## Installation
 
@@ -13,7 +13,9 @@ Sends events to Google Analytics from within Atom
 
 ## Usage
 
-**Examples**:
+### Basic Examples
+
+Once the Metrics class has been instantiated, events can be fired from anywhere in your package.
 
 ```js
 // JavaScript
@@ -41,6 +43,37 @@ module.exports =
       category: "Demo"
       action: "Package activated!"
     }
+```
+
+### Command Metrics Example
+
+Command metrics allow simple tracking of invoked package commands. In the following example, all commands provided by the `settings-view` package will be tracked by Google Analytics.
+
+```js
+// JavaScript
+import Metrics from '@atxmtx/metrics';
+
+export async function activate() {
+    new Metrics('UA-XXXX-Y', {
+      commandCategory: 'Settings View Commands',
+      commandAction: [
+        'settings-view:*'
+      ]
+    });
+};
+```
+
+```coffee
+# CoffeeScript
+const Metrics = require "@atxmtx/metrics"
+
+module.exports =
+  activate: () ->
+    new Metrics('UA-XXXX-Y',
+      commandCategory: 'Settings View Commands'
+      commandAction: [
+        'settings-view:*'
+      ])
 ```
 
 ### Methods
@@ -71,17 +104,30 @@ Sends an event to Google Analystics
 
 ### Options
 
+#### commandAction
+
+Type: `string | string[]`
+
+Used to track specified package commands, supports wildcards (e.g. `my-package:*`).
+
+#### commandCategory
+
+Type: `string`
+Default: `Package Command`
+
+Default event category for package commands.
+
 #### cacheBuster
 
-Type: `boolean`  
-Default: `false`  
+Type: `boolean`
+Default: `false`
 
 Used to send a random number in GET requests to ensure browsers and proxies don't cache hits.
 
 ### muted
 
-Type: `boolean`  
-Default: `false`  
+Type: `boolean`
+Default: `false`
 
 Skips add event listeners when the class is instantiated.
 

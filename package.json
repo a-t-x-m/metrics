@@ -1,7 +1,7 @@
 {
   "name": "@atxmtx/metrics",
   "version": "0.1.0",
-  "description": "Sends events to Google Analytics from within Atom",
+  "description": "Google Analytics event tracking for Atom packages",
   "license": "MIT OR GPL-2.0",
   "scripts": {
     "build": "tsc --pretty --project ./",

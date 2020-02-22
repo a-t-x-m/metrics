@@ -1,5 +1,7 @@
 interface MetricsOptions {
   cacheBuster?: boolean;
+  commandAction?: string | string[];
+  commandCategory?: string;
   muted?: boolean;
 }
 
