@@ -130,7 +130,7 @@ export default class Metrics {
     const filteredCommands = [];
 
     commands.forEach(command => {
-      const filtered = wildcard(command, registeredCommands)
+      const filtered = wildcard(command, registeredCommands);
 
       filteredCommands.push(...filtered);
     });
