@@ -21,6 +21,16 @@ export default class Metrics {
       return;
     }
 
+    if (atom.inDevMode() && this.options.trackDevMode !== true) {
+      log(`${this.title}: Tracking has not been enable for Developer Mode, aborting`);
+      return;
+    }
+
+    if (atom.inSpecMode() && !this.options.trackSpecMode !== true) {
+      log(`${this.title}: Tracking has not been enable for Spec Mode, aborting`);
+      return;
+    }
+
     this.trackingID = trackingID;
     this.clientID = this.getClientID();
 

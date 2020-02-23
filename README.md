@@ -139,6 +139,20 @@ Default: `false`
 
 Skips adding event listeners when the class is instantiated.
 
+#### trackDevMode
+
+Type: `boolean`  
+Default: `false`  
+
+Enables tracking if the current window is in development mode.
+
+#### trackSpecMode
+
+Type: `boolean`  
+Default: `false`  
+
+Enables tracking if current window is running specs.
+
 ## License
 
 This work is dual-licensed under [The MIT License](https://opensource.org/licenses/MIT) and the [GNU General Public License, version 2.0](https://opensource.org/licenses/GPL-2.0)

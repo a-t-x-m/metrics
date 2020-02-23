@@ -4,6 +4,8 @@ interface MetricsOptions {
   commandCategory?: string;
   consentSetting?: string;
   muted?: boolean;
+  trackDevMode?: boolean;
+  trackSpecMode?: boolean;
 }
 
 interface GoogleEvent {
