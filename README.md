@@ -106,30 +106,36 @@ Sends an event to Google Analystics
 
 ### Options
 
+#### cacheBuster
+
+Type: `boolean`
+Default: `false`
+
+Used to send a random number in GET requests to ensure browsers and proxies don't cache hits.
+
 #### commandAction
 
-Type: `string | string[]`  
+Type: `string | string[]`
 
 Used to track specified package commands, supports wildcards (e.g. `my-package:*`).
 
 #### commandCategory
 
-Type: `string`  
-Default: `Package Command`  
+Type: `string`
+Default: `Package Command`
 
 Default event category for package commands.
 
-#### cacheBuster
+#### consentSetting
 
-Type: `boolean`  
-Default: `false`  
+Type: `string`
 
-Used to send a random number in GET requests to ensure browsers and proxies don't cache hits.
+Specifies a package setting in which the user can deny tracking, e.g. in compliance with the [GDPR](https://www.wikiwand.com/en/General_Data_Protection_Regulation).
 
 #### muted
 
-Type: `boolean`  
-Default: `false`  
+Type: `boolean`
+Default: `false`
 
 Skips adding event listeners when the class is instantiated.
 

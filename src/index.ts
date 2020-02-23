@@ -14,16 +14,22 @@ export default class Metrics {
   trackingID: string;
 
   constructor(trackingID: string, options: MetricsOptions = {}) {
-    this.trackingID = trackingID;
     this.options = { ...this.options, ...options };
+
+    if (this.options.consentSetting?.length && atom.config.get(this.options.consentSetting) !== true) {
+      log(`${this.title}: No consent given by the user, aborting tracking`);
+      return;
+    }
+
+    this.trackingID = trackingID;
     this.clientID = this.getClientID();
 
-    if (!options.muted) {
+    if (!this.options.muted) {
       this.listen();
     }
 
-    if (options.commandAction?.length) {
-      this.commandListener(options.commandAction);
+    if (this.options.commandAction?.length) {
+      this.commandListener(this.options.commandAction);
     }
   }
 

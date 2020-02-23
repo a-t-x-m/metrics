@@ -2,6 +2,7 @@ interface MetricsOptions {
   cacheBuster?: boolean;
   commandAction?: string | string[];
   commandCategory?: string;
+  consentSetting?: string;
   muted?: boolean;
 }
 
