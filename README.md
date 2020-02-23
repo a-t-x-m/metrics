@@ -121,8 +121,8 @@ Used to track specified package commands, supports wildcards (e.g. `my-package:*
 
 #### commandCategory
 
-Type: `string`
-Default: `Package Command`
+Type: `string`  
+Default: `Package Command`  
 
 Default event category for package commands.
 
@@ -134,8 +134,8 @@ Specifies a package setting in which the user can deny tracking, e.g. in complia
 
 #### muted
 
-Type: `boolean`
-Default: `false`
+Type: `boolean`  
+Default: `false`  
 
 Skips adding event listeners when the class is instantiated.
 
