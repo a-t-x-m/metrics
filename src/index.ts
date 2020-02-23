@@ -22,12 +22,12 @@ export default class Metrics {
     }
 
     if (atom.inDevMode() && this.options.trackDevMode !== true) {
-      log(`${this.title}: Tracking has not been enable for Developer Mode, aborting`);
+      log(`${this.title}: Tracking has not been enabled for Developer Mode, aborting`);
       return;
     }
 
     if (atom.inSpecMode() && !this.options.trackSpecMode !== true) {
-      log(`${this.title}: Tracking has not been enable for Spec Mode, aborting`);
+      log(`${this.title}: Tracking has not been enabled for Spec Mode, aborting`);
       return;
     }
 
