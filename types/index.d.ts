@@ -3,6 +3,7 @@ interface MetricsOptions {
   commandAction?: string | string[];
   commandCategory?: string;
   consentSetting?: string;
+  dryRun?: boolean;
   muted?: boolean;
   trackDevMode?: boolean;
   trackSpecMode?: boolean;

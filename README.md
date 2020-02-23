@@ -132,6 +132,13 @@ Type: `string`
 
 Specifies a package setting in which the user can deny tracking, e.g. in compliance with the [GDPR](https://www.wikiwand.com/en/General_Data_Protection_Regulation).
 
+#### dryRun
+
+Type: `boolean`  
+Default: `false`  
+
+Skips sending the actual request to Google Analytics.
+
 #### muted
 
 Type: `boolean`  

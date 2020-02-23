@@ -118,9 +118,11 @@ export default class Metrics {
 
     log(`${this.title}: Sending request to ${requestURL}`);
 
-    const response = await (<any>global).fetch(requestURL, {
-      method: 'POST'
-    });
+    if (this.options.dryRun !== true) {
+      const response = await (<any>global).fetch(requestURL, {
+        method: 'POST'
+      });
+    }
   }
 
   private defaultParams() {
