@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@atxmtx/developer-console@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@atxmtx/developer-console/-/developer-console-0.1.1.tgz#d333a58b7b904ff01717f69c21ef37e3d029dde8"
+  integrity sha512-utPoC15NS3ogUTbjPxO4ZNYo3Lz8fseedv5/8lF4KdqRHM8Op31NGVH90JLx4snUIhit42SmNVO3gY1Cle53SA==
+
 "@babel/code-frame@^7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"
@@ -524,6 +529,11 @@ which-pm-runs@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/which-pm-runs/-/which-pm-runs-1.0.0.tgz#670b3afbc552e0b55df6b7780ca74615f23ad1cb"
   integrity sha1-Zws6+8VS4LVd9rd4DKdGFfI60cs=
+
+wildcard@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/wildcard/-/wildcard-2.0.0.tgz#a77d20e5200c6faaac979e4b3aadc7b3dd7f8fec"
+  integrity sha512-JcKqAHLPxcdb9KM49dufGXn2x3ssnfjbcaQdLlfZsL9rH9wgDQjUtDxbo8NE0F6SFvydeu1VhZe7hZuHsB2/pw==
 
 wrappy@1:
   version "1.0.2"

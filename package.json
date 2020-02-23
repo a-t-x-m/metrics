@@ -22,7 +22,8 @@
     "@atxmtx/developer-console": "^0.1.1",
     "address": "^1.1.2",
     "query-string": "^6.11.0",
-    "uuid": "^3.4.0"
+    "uuid": "^3.4.0",
+    "wildcard": "^2.0.0"
   },
   "devDependencies": {
     "@types/atom": "^1.36.2",
