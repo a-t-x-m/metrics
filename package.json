@@ -1,10 +1,10 @@
 {
-  "name": "@atxmtx/metrics",
+  "name": "@atxm/metrics",
   "version": "0.5.1",
   "description": "Google Analytics event tracking for Atom packages",
   "license": "MIT OR GPL-2.0",
   "scripts": {
-    "build": "tsc --pretty --project ./",
+    "build": "rimraf tsconfig.tsbuildinfo && tsc --pretty --project ./",
     "dev": "tsc --watch --pretty --project ./",
     "lint": "tslint --project ./",
     "lint:fix": "tslint --fix --project ./"
@@ -12,14 +12,14 @@
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/atxmtx/metrics.git"
+    "url": "https://github.com/a-t-x-m/metrics.git"
   },
   "keywords": [
     "atom",
     "atom package"
   ],
   "dependencies": {
-    "@atxmtx/developer-console": "^0.1.1",
+    "@atxm/developer-console": "^0.2.0",
     "address": "^1.1.2",
     "query-string": "^6.11.0",
     "uuid": "^3.4.0",
@@ -29,6 +29,7 @@
     "@types/atom": "^1.36.2",
     "@types/node": "^13.7.4",
     "husky": "^4.2.0",
+    "rimraf": "^3.0.2",
     "tslint": "^6.0.0",
     "typescript": "^3.8.2"
   },

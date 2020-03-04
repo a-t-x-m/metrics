@@ -1,7 +1,7 @@
 'use strict';
 
 import { createHash } from 'crypto';
-import { log, error as errorLog } from '@atxmtx/developer-console';
+import { log, error as errorLog } from '@atxm/developer-console';
 import { mac as getMAC } from 'address';
 import { v4 as uuid } from 'uuid';
 import queryString from 'query-string';
@@ -10,7 +10,7 @@ import wildcard from 'wildcard';
 export default class Metrics {
   clientID: string;
   options: MetricsOptions = { commandCategory: 'Package Command' };
-  title: string = '@atxmtx/metrics';
+  title: string = '@atxm/metrics';
   trackingID: string;
 
   constructor(trackingID: string, options: MetricsOptions = {}) {
