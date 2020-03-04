@@ -21,17 +21,17 @@
   "dependencies": {
     "@atxm/developer-console": "^0.2.0",
     "address": "^1.1.2",
-    "query-string": "^6.11.0",
-    "uuid": "^3.4.0",
+    "query-string": "^6.11.1",
+    "uuid": "^7.0.2",
     "wildcard": "^2.0.0"
   },
   "devDependencies": {
-    "@types/atom": "^1.36.2",
-    "@types/node": "^13.7.4",
+    "@types/atom": "^1.40.1",
+    "@types/node": "^13.7.7",
     "husky": "^4.2.0",
     "rimraf": "^3.0.2",
     "tslint": "^6.0.0",
-    "typescript": "^3.8.2"
+    "typescript": "^3.8.3"
   },
   "husky": {
     "hooks": {
