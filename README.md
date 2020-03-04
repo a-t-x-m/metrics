@@ -37,7 +37,7 @@ Metrics = require "@atxm/metrics"
 
 module.exports =
   activate: () ->
-    ga = new Metrics("UA-XXXX-Y");
+    ga = new Metrics("UA-XXXX-Y")
 
     ga.event {
       category: "Demo"
@@ -65,7 +65,7 @@ export async function activate() {
 
 ```coffee
 # CoffeeScript
-const Metrics = require "@atxm/metrics"
+Metrics = require "@atxm/metrics"
 
 module.exports =
   activate: () ->
