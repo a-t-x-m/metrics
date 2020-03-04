@@ -1,6 +1,6 @@
 {
   "name": "@atxm/metrics",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Google Analytics event tracking for Atom packages",
   "license": "MIT OR GPL-2.0",
   "scripts": {
