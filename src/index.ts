@@ -132,10 +132,8 @@ export default class Metrics {
       ds: 'app',
       t: 'event',
       tid: this.trackingID,
-      // @ts-ignore
       ua: `${atom.getAppName()} v${atom.getVersion()} (${atom.getReleaseChannel()})`,
       v: '1',
-      // @ts-ignore
       vp: `${atom.getWindowDimensions().width}x${atom.getWindowDimensions().height}`
     };
   }
