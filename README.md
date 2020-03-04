@@ -33,7 +33,7 @@ export async function activate() {
 
 ```coffee
 # CoffeeScript
-const Metrics = require "@atxm/metrics"
+Metrics = require "@atxm/metrics"
 
 module.exports =
   activate: () ->
