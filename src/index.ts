@@ -3,7 +3,7 @@
 import { createHash } from 'crypto';
 import { log } from '@atxm/developer-console';
 import { mac as getMAC } from 'address';
-import { sep } from 'path';
+import { sep as pathSeparator } from 'path';
 import { v4 as uuid } from 'uuid';
 import callerCallsite from 'caller-callsite';
 import queryString from 'query-string';
@@ -188,7 +188,7 @@ export default class Metrics {
     if (intersection?.length) {
       return callerPath
         .replace(intersection[0], '')
-        .split(sep)
+        .split(pathSeparator)
         .filter(fragment => fragment)[0] || '';
     }
   }
