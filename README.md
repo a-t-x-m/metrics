@@ -13,9 +13,9 @@ Google Analytics event tracking for Atom packages
 
 ## Usage
 
-### Basic Examples
+Tracking of command provided by your package is enabled by default. Additionally, custom events can be fired from anywhere in your package.
 
-Once the Metrics class has been instantiated, custom events can be fired from anywhere in your package.
+**Example:**
 
 ```js
 // JavaScript
