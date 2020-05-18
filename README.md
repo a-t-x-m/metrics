@@ -15,7 +15,7 @@ Google Analytics event tracking for Atom packages
 
 ### Basic Examples
 
-Once the Metrics class has been instantiated, events can be fired from anywhere in your package.
+Once the Metrics class has been instantiated, custom events can be fired from anywhere in your package.
 
 ```js
 // JavaScript
@@ -44,39 +44,6 @@ module.exports =
       action: "Package activated!"
     }
 ```
-
-### Command Metrics Example
-
-Command metrics allow simple tracking of invoked package commands. In the following example, all commands provided by the `settings-view` package will be tracked by Google Analytics.
-
-```js
-// JavaScript
-import Metrics from '@atxm/metrics';
-
-export async function activate() {
-    new Metrics('UA-XXXX-Y', {
-      commandCategory: 'Settings View Commands',
-      commandAction: [
-        'settings-view:*'
-      ]
-    });
-};
-```
-
-```coffee
-# CoffeeScript
-Metrics = require "@atxm/metrics"
-
-module.exports =
-  activate: () ->
-    new Metrics('UA-XXXX-Y',
-      commandCategory: 'Settings View Commands'
-      commandAction: [
-        'settings-view:*'
-      ])
-```
-
-**Note:** Invoking commands from `tool-bar` packages is currently not supported!
 
 ### Methods
 
@@ -113,18 +80,19 @@ Default: `false`
 
 Used to send a random number in GET requests to ensure browsers and proxies don't cache hits.
 
-#### commandAction
-
-Type: `string | string[]`
-
-Used to track specified package commands, supports wildcards (e.g. `my-package:*`).
-
 #### commandCategory
 
 Type: `string`
 Default: `Package Command`
 
 Default event category for package commands.
+
+#### commandTracking
+
+Type: `boolean`
+Default: `true`
+
+Sends an event to Google Analystics whenever a command provided by your package is invoked.
 
 #### consentSetting
 

@@ -14,4 +14,5 @@ export default class Metrics {
     private getCommands;
     private getMacAddress;
     private getClientID;
+    private getPackageName;
 }

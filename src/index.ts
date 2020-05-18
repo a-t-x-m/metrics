@@ -1,15 +1,19 @@
 'use strict';
 
 import { createHash } from 'crypto';
-import { log, error as errorLog } from '@atxm/developer-console';
+import { log } from '@atxm/developer-console';
 import { mac as getMAC } from 'address';
+import { sep } from 'path';
 import { v4 as uuid } from 'uuid';
+import callerCallsite from 'caller-callsite';
 import queryString from 'query-string';
-import wildcard from 'wildcard';
 
 export default class Metrics {
   clientID: string;
-  options: MetricsOptions = { commandCategory: 'Package Command' };
+  options: MetricsOptions = {
+    commandTracking: true,
+    commandCategory: 'Package Command'
+  };
   title: string = '@atxm/metrics';
   trackingID: string;
 
@@ -38,8 +42,8 @@ export default class Metrics {
       this.listen();
     }
 
-    if (this.options.commandAction?.length) {
-      this.commandListener(this.options.commandAction);
+    if (!this.options.commandTracking) {
+      this.commandListener();
     }
   }
 
@@ -75,7 +79,6 @@ export default class Metrics {
 
     const { category, action, label, value } = (<any>event).detail;
 
-    const defaultParams = this.defaultParams();
     const urlParams = {
       ...this.defaultParams(),
       ec: category.trim(),
@@ -97,12 +100,12 @@ export default class Metrics {
     this.sendEvent(urlParams);
   }
 
-  private commandListener(commands) {
-    const filteredCommands = this.getCommands(commands);
-
-    log(`${this.title}: Adding event listener for commands:`, filteredCommands);
+  private commandListener() {
+    const filteredCommands: string[] = this.getCommands();
 
     filteredCommands.map(command => {
+      log(`${this.title}: Adding event listener for command:`, command);
+
       (<any>global).addEventListener(command, () => {
         this.event({
           category: this.options.commandCategory,
@@ -138,20 +141,12 @@ export default class Metrics {
     };
   }
 
-  private getCommands(commands) {
-    commands = typeof commands === 'string' ? [commands] : commands;
-
+  private getCommands(): string[] {
+    const packageName = this.getPackageName();
     // @ts-ignore
-    const registeredCommands = Object.keys(atom.commands.registeredCommands);
-    const filteredCommands = [];
+    const registeredCommands: string[] = Object.keys(atom.commands.registeredCommands);
 
-    commands.forEach(command => {
-      const filtered = wildcard(command, registeredCommands);
-
-      filteredCommands.push(...filtered);
-    });
-
-    return filteredCommands;
+    return registeredCommands.filter(registeredCommand => registeredCommand.startsWith(`${packageName}:`));
   }
 
   private getMacAddress(): string | void {
@@ -180,5 +175,21 @@ export default class Metrics {
     }
 
     return clientID;
+  }
+
+  private getPackageName(): string {
+    const callerPath: string = callerCallsite().getFileName();
+    const packageDirPaths: string[] = atom.packages.getPackageDirPaths();
+
+    const intersection: string[] = packageDirPaths.filter(packageDirPath => {
+      return callerPath.startsWith(packageDirPath);
+    });
+
+    if (intersection?.length) {
+      return callerPath
+        .replace(intersection[0], '')
+        .split(sep)
+        .filter(fragment => fragment)[0] || '';
+    }
   }
 }
