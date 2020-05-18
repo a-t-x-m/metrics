@@ -42,7 +42,7 @@ export default class Metrics {
       this.listen();
     }
 
-    if (!this.options.commandTracking) {
+    if (this.options.commandTracking) {
       this.commandListener();
     }
   }
