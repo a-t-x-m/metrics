@@ -5,9 +5,10 @@
   "license": "MIT OR GPL-2.0",
   "scripts": {
     "build": "rimraf tsconfig.tsbuildinfo && tsc --pretty --project ./",
-    "dev": "tsc --watch --pretty --project ./",
+    "dev": "npm run start",
     "lint": "tslint --project ./",
-    "lint:fix": "tslint --fix --project ./"
+    "lint:fix": "tslint --fix --project ./",
+    "start": "tsc --watch --pretty --project ./"
   },
   "main": "lib/index.js",
   "repository": {
