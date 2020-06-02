@@ -57,7 +57,7 @@ Instantiates class and adds event listeners, unless [`option.muted`](#muted) is 
 
 Usage: `listen()`
 
-Manuall add event listener, e.g. for when [`option.muted`](#muted) is `true`
+Manually add event listener, e.g. for when [`option.muted`](#muted) is `true`
 
 #### mute
 
