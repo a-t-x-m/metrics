@@ -45,6 +45,8 @@ module.exports =
     }
 ```
 
+**Note:** In order to make your Atom package compliant with the [GDPR][gdpr] or the [CCPA][ccpa], you need to provide a privacy policy and a consent setting!
+
 ### Methods
 
 #### constructor
@@ -98,7 +100,7 @@ Sends an event to Google Analystics whenever a command provided by your package 
 
 Type: `string`
 
-Specifies a package setting in which the user can deny tracking, e.g. in compliance with the [GDPR](https://www.wikiwand.com/en/General_Data_Protection_Regulation).
+Specifies a package setting in which the user can deny tracking, e.g. in compliance with the [GDPR][gdpr] or the [CCPA][ccpa].
 
 #### dryRun
 
@@ -131,3 +133,6 @@ Enables tracking if current window is running specs.
 ## License
 
 This work is dual-licensed under [The MIT License](https://opensource.org/licenses/MIT) and the [GNU General Public License, version 2.0](https://opensource.org/licenses/GPL-2.0)
+
+[gdpr]: https://www.wikiwand.com/en/General_Data_Protection_Regulation
+[ccpa]: https://www.wikiwand.com/en/California_Consumer_Privacy_Act
