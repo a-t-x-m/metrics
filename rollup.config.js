@@ -13,7 +13,7 @@ export default [
     input: 'src/index.ts',
     output: {
       dir: 'lib',
-      format: 'cjs'
+      format: 'esm'
     },
     plugins: plugins
   }

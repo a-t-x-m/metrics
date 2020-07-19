@@ -11,6 +11,7 @@
     "start": "rollup -w -c"
   },
   "main": "lib/index.js",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/a-t-x-m/metrics.git"
