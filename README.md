@@ -19,7 +19,7 @@ Tracking of commands provided by your package is enabled by default. Additionall
 
 ```js
 // JavaScript
-import { Metrics } from '@atxm/metrics';
+import Metrics from '@atxm/metrics';
 
 export async function activate() {
     const ga = new Metrics('UA-XXXX-Y');
@@ -33,7 +33,7 @@ export async function activate() {
 
 ```coffee
 # CoffeeScript
-{ Metrics } = require "@atxm/metrics"
+Metrics = require "@atxm/metrics"
 
 module.exports =
   activate: () ->

@@ -8,7 +8,7 @@ import { v4 as uuid } from 'uuid';
 import callerCallsite from 'caller-callsite';
 import queryString from 'query-string';
 
-export class Metrics {
+export default class Metrics {
   clientID: string;
   options: MetricsOptions = {
     commandTracking: true,
