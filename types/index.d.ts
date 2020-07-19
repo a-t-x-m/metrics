@@ -13,5 +13,5 @@ interface GoogleEvent {
   category: string;
   action: string;
   label?: string;
-  value?: Number;
+  value?: number;
 }
