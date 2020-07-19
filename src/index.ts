@@ -8,13 +8,13 @@ import { v4 as uuid } from 'uuid';
 import callerCallsite from 'caller-callsite';
 import queryString from 'query-string';
 
-export default class Metrics {
+export class Metrics {
   clientID: string;
   options: MetricsOptions = {
     commandTracking: true,
     commandCategory: 'Package Command'
   };
-  title: string = '@atxm/metrics';
+  title = '@atxm/metrics';
   trackingID: string;
 
   constructor(trackingID: string, options: MetricsOptions = {}) {
@@ -47,19 +47,19 @@ export default class Metrics {
     }
   }
 
-  public listen() {
+  public listen(): void {
     log(`${this.title}: Adding event listener`);
 
-    (<any>global).addEventListener(this.title, this.handler.bind(this));
+    window.addEventListener(this.title, this.handler.bind(this));
   }
 
-  public mute() {
+  public mute(): void {
     log(`${this.title}: Removing event listener`);
 
-    (<any>global).removeEventListener(this.title, this.handler.bind(this));
+    window.removeEventListener(this.title, this.handler.bind(this));
   }
 
-  public event(payload: GoogleEvent) {
+  public event(payload: GoogleEvent): void {
     const customEvent = new CustomEvent(
       this.title,
       {
@@ -69,15 +69,15 @@ export default class Metrics {
 
     log(`${this.title}: Dispatching event to Google Analytics`, payload);
 
-    (<any>global).dispatchEvent(customEvent);
+    window.dispatchEvent(customEvent);
   }
 
-  private handler(event: Event) {
-    if (!(<any>event).detail.category || !(<any>event).detail.action) {
+  private handler({ detail }) {
+    if (!detail.category || !detail.action) {
       throw 'Event Tracking requires category and action';
     }
 
-    const { category, action, label, value } = (<any>event).detail;
+    const { category, action, label, value } = detail;
 
     const urlParams = {
       ...this.defaultParams(),
@@ -106,7 +106,7 @@ export default class Metrics {
     filteredCommands.map(command => {
       log(`${this.title}: Adding event listener for command:`, command);
 
-      (<any>global).addEventListener(command, () => {
+      window.addEventListener(command, () => {
         this.event({
           category: this.options.commandCategory,
           action: command
@@ -122,7 +122,7 @@ export default class Metrics {
     log(`${this.title}: Sending request to ${requestURL}`);
 
     if (this.options.dryRun !== true) {
-      const response = await (<any>global).fetch(requestURL, {
+      await window.fetch(requestURL, {
         method: 'POST'
       });
     }
@@ -150,7 +150,9 @@ export default class Metrics {
   }
 
   private getMacAddress(): string | void {
-    const macAddress = getMAC((error, data) => error ? null : data.toString());
+    const macAddress = getMAC((error, data) => error
+      ? null
+      : data.toString());
 
     if (macAddress !== null) log(`${this.title}: Detected MAC address '${macAddress}'`);
 
