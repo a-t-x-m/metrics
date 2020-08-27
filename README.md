@@ -99,7 +99,7 @@ Skips sending the actual request to Google Analytics.
 Type: `boolean`
 Default: `false`
 
-Skips adding event listeners when the class is instantiated.
+Skips adding event listeners when the module is initialized.
 
 #### trackDevMode
 
