@@ -8,7 +8,15 @@ const plugins = [
     preferBuiltins: true
   }),
   typescript({
-    allowSyntheticDefaultImports: true
+    allowSyntheticDefaultImports: true,
+    lib: [
+      'dom',
+      'esnext'
+    ],
+    typeRoots: [
+      './node_modules/@types',
+      './types'
+    ]
   })
 ];
 
