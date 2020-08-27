@@ -22,6 +22,14 @@ const plugins = [
 
 export default [
   {
+    external: [
+      'child_process',
+      'crypto',
+      'fs',
+      'path',
+      'os',
+      'util'
+    ],
     input: 'src/index.ts',
     output: {
       dir: 'lib',

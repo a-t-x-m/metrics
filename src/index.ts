@@ -2,41 +2,43 @@
 
 import { createHash } from 'crypto';
 import { log } from '@atxm/developer-console';
-import { mac as getMAC } from 'address';
+import { mac } from 'address';
+import { promisify } from 'util';
 import { sep as pathSeparator } from 'path';
 import { v4 as uuid } from 'uuid';
 import callerCallsite from 'caller-callsite';
 import queryString from 'query-string';
 
-export default class Metrics {
-  clientID: string;
-  options: MetricsOptions = {
-    commandTracking: true,
-    commandCategory: 'Package Command'
-  };
-  title = '@atxm/metrics';
-  trackingID: string;
+const getMAC = promisify(mac);
 
-  constructor(trackingID: string, options: MetricsOptions = {}) {
+const title = '@atxm/metrics';
+
+const Metrics = ({
+  clientID: '',
+  trackingID: '',
+  options: {
+    commandTracking: true,
+    commandCategory: 'Package Command',
+  },
+  init(trackingID: string, options: MetricsOptions = {}): Promise<void> {
     this.options = { ...this.options, ...options };
 
     if (this.options.consentSetting?.length && atom.config.get(this.options.consentSetting) !== true) {
-      log(`${this.title}: No consent given by the user, aborting tracking`);
+      log(`${title}: No consent given by the user, aborting tracking`);
       return;
     }
 
     if (atom.inDevMode() && this.options.trackDevMode !== true) {
-      log(`${this.title}: Tracking has not been enabled for Developer Mode, aborting`);
+      log(`${title}: Tracking has not been enabled for Developer Mode, aborting`);
       return;
     }
 
     if (atom.inSpecMode() && !this.options.trackSpecMode !== true) {
-      log(`${this.title}: Tracking has not been enabled for Spec Mode, aborting`);
+      log(`${title}: Tracking has not been enabled for Spec Mode, aborting`);
       return;
     }
 
     this.trackingID = trackingID;
-    this.clientID = this.getClientID();
 
     if (!this.options.muted) {
       this.listen();
@@ -45,42 +47,39 @@ export default class Metrics {
     if (this.options.commandTracking) {
       this.commandListener();
     }
-  }
+  },
+  listen(): void {
+    log(`${title}: Adding event listener`);
 
-  public listen(): void {
-    log(`${this.title}: Adding event listener`);
+    window.addEventListener(title, this.handler.bind(this));
+  },
+  mute(): void {
+    log(`${title}: Removing event listener`);
 
-    window.addEventListener(this.title, this.handler.bind(this));
-  }
-
-  public mute(): void {
-    log(`${this.title}: Removing event listener`);
-
-    window.removeEventListener(this.title, this.handler.bind(this));
-  }
-
-  public event(payload: GoogleEvent): void {
+    window.removeEventListener(title, this.handler.bind(this));
+  },
+  event(payload: GoogleEvent): void {
     const customEvent = new CustomEvent(
-      this.title,
+      title,
       {
         detail: payload
       }
     );
 
-    log(`${this.title}: Dispatching event to Google Analytics`, payload);
+    log(`${title}: Dispatching event`, payload);
 
     window.dispatchEvent(customEvent);
-  }
-
-  private handler({ detail }) {
+  },
+  async handler({ detail }: unknown): Promise<void> {
     if (!detail.category || !detail.action) {
       throw 'Event Tracking requires category and action';
     }
 
     const { category, action, label, value } = detail;
+    const defaultParams = await this.defaultParams();
 
     const urlParams = {
-      ...this.defaultParams(),
+      ...defaultParams,
       ec: category.trim(),
       ea: action.trim()
     };
@@ -97,14 +96,13 @@ export default class Metrics {
       urlParams['z'] = Date.now();
     }
 
-    this.sendEvent(urlParams);
-  }
-
-  private commandListener() {
+    this.sendEvent(Object.freeze(urlParams));
+  },
+  commandListener(): void {
     const filteredCommands: string[] = this.getCommands();
 
     filteredCommands.map(command => {
-      log(`${this.title}: Adding event listener for command:`, command);
+      log(`${title}: Adding event listener for command:`, command);
 
       window.addEventListener(command, () => {
         this.event({
@@ -113,23 +111,25 @@ export default class Metrics {
         });
       });
     });
-  }
-
-  private async sendEvent(urlParams) {
+  },
+  async sendEvent(urlParams: GoogleUrlParams): Promise<void> {
     const urlParamsEncoded = queryString.stringify(urlParams);
     const requestURL = `https://www.google-analytics.com/collect?${urlParamsEncoded}`;
 
-    log(`${this.title}: Sending request to ${requestURL}`);
+    log(`${title}: Sending request to ${requestURL}`);
 
     if (this.options.dryRun !== true) {
       await window.fetch(requestURL, {
         method: 'POST'
       });
     }
-  }
+  },
+  async defaultParams(): Promise<GoogleUrlParams> {
+    if (!this.clientID.length) {
+      this.clientID = await this.getClientID();
+    }
 
-  private defaultParams() {
-    return {
+    return Object.freeze({
       aip: '1',
       cid: this.clientID,
       ds: 'app',
@@ -138,29 +138,17 @@ export default class Metrics {
       ua: `${atom.getAppName()} v${atom.getVersion()} (${atom.getReleaseChannel()})`,
       v: '1',
       vp: `${atom.getWindowDimensions().width}x${atom.getWindowDimensions().height}`
-    };
-  }
-
-  private getCommands(): string[] {
+    });
+  },
+  getCommands(): string[] {
     const packageName = this.getPackageName();
     // @ts-ignore
     const registeredCommands: string[] = Object.keys(atom.commands.registeredCommands);
 
     return registeredCommands.filter(registeredCommand => registeredCommand.startsWith(`${packageName}:`));
-  }
-
-  private getMacAddress(): string | void {
-    const macAddress = getMAC((error, data) => error
-      ? null
-      : data.toString());
-
-    if (macAddress !== null) log(`${this.title}: Detected MAC address '${macAddress}'`);
-
-    return macAddress;
-  }
-
-  private getClientID(): string {
-    const macAddress = this.getMacAddress();
+  },
+  async getClientID(): Promise<string> {
+    const macAddress = await getMAC() || null;
 
     const clientID: string = macAddress
       ? createHash('sha1')
@@ -171,15 +159,14 @@ export default class Metrics {
       : uuid();
 
     if (macAddress) {
-      log(`${this.title}: Created client ID '${clientID}' from MAC address`);
+      log(`${title}: Created client ID '${clientID}' from MAC address`);
     } else {
-      log(`${this.title}: Created client ID '${clientID}' from UUID`);
+      log(`${title}: Created client ID '${clientID}' from UUID`);
     }
 
     return clientID;
-  }
-
-  private getPackageName(): string {
+  },
+  getPackageName(): string {
     const callerPath: string = callerCallsite().getFileName();
     const packageDirPaths: string[] = atom.packages.getPackageDirPaths();
 
@@ -194,4 +181,7 @@ export default class Metrics {
         .filter(fragment => fragment)[0] || '';
     }
   }
-}
+});
+
+export default Metrics;
+export { Metrics };

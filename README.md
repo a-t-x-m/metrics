@@ -22,9 +22,9 @@ Tracking of commands provided by your package is enabled by default. Additionall
 import Metrics from '@atxm/metrics';
 
 export async function activate() {
-    const ga = new Metrics('UA-XXXX-Y');
+    Metrics.init('UA-XXXX-Y');
 
-    ga.event({
+    Metrics.event({
       category: 'Demo',
       action: 'Package activated!'
     });
@@ -37,9 +37,9 @@ Metrics = require "@atxm/metrics"
 
 module.exports =
   activate: () ->
-    ga = new Metrics("UA-XXXX-Y")
+    Metrics.init("UA-XXXX-Y")
 
-    ga.event {
+    Metrics.event {
       category: "Demo"
       action: "Package activated!"
     }
@@ -49,11 +49,11 @@ module.exports =
 
 ### Methods
 
-#### constructor
+#### init
 
-Usage: `new Metrics(trackingID: string, options: object)`
+Usage: `init(trackingID: string, options: object)`
 
-Instantiates class and adds event listeners, unless [`option.muted`](#muted) is used
+Initializes module adds event listeners, unless [`option.muted`](#muted) is used
 
 #### listen
 
@@ -71,7 +71,7 @@ Removes event listener
 
 Usage: `event({ category: string, action: string, label?: string, value?: number})`
 
-Sends an event to Google Analystics
+Dispatches an event to Google Analystics
 
 ### Options
 
