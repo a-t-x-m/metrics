@@ -18,7 +18,11 @@
   },
   "keywords": [
     "atom",
-    "atom package"
+    "atom package",
+    "analytics",
+    "google analytics",
+    "tracking",
+    "metrics"
   ],
   "dependencies": {
     "@atxm/developer-console": "^0.2.2",
