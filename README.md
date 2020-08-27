@@ -18,7 +18,6 @@ Tracking of commands provided by your package is enabled by default. Additionall
 **Example:**
 
 ```js
-// JavaScript
 import Metrics from '@atxm/metrics';
 
 export async function activate() {
@@ -29,20 +28,6 @@ export async function activate() {
       action: 'Package activated!'
     });
 };
-```
-
-```coffee
-# CoffeeScript
-Metrics = require "@atxm/metrics"
-
-module.exports =
-  activate: () ->
-    Metrics.init("UA-XXXX-Y")
-
-    Metrics.event {
-      category: "Demo"
-      action: "Package activated!"
-    }
 ```
 
 **Note:** In order to make your Atom package compliant with the [GDPR][gdpr] or the [CCPA][ccpa], you need to provide a privacy policy and a [consent setting](#consentSetting)!
