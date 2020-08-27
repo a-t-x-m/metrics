@@ -6,8 +6,8 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "npm run start",
+    "fix": "eslint --fix ./src",
     "lint": "eslint ./src",
-    "lint:fix": "eslint --fix ./src",
     "start": "rollup -w -c"
   },
   "main": "lib/index.js",
