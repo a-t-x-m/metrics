@@ -168,7 +168,11 @@ const Metrics = ({
     return clientID;
   },
   getIP(): string {
-    return ipRegex({exact: true}).test(this.options.ipOverride) || ipRegex.v6({exact: true}).test(this.options.ipOverride)
+    const ipRegexOptions = {
+      exact: true
+    };
+
+    return ipRegex(ipRegexOptions).test(this.options.ipOverride) || ipRegex.v6(ipRegexOptions).test(this.options.ipOverride)
       ? this.options.ipOverride
       : '127.0.0.1';
   },
