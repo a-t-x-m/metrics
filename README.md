@@ -23,7 +23,7 @@ import Metrics from '@atxm/metrics';
 export async function activate() {
     Metrics.init('UA-XXXX-Y');
 
-    Metrics.event({
+    Metrics.dispatchEvent({
       category: 'Demo',
       action: 'Package activated!'
     });
@@ -52,9 +52,9 @@ Usage: `mute()`
 
 Removes event listener
 
-#### event
+#### dispatchEvent
 
-Usage: `event({ category: string, action: string, label?: string, value?: number})`
+Usage: `dispatchEvent({ category: string, action: string, label?: string, value?: number})`
 
 Dispatches an event to Google Analystics
 
@@ -79,7 +79,7 @@ Default event category for package commands.
 Type: `boolean`  
 Default: `true`  
 
-Sends an event to Google Analystics whenever a command provided by your package is invoked.
+Dispatches an event to Google Analystics whenever a command provided by your package is invoked.
 
 #### consentSetting
 

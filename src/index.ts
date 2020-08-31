@@ -59,7 +59,7 @@ const Metrics = ({
 
     window.removeEventListener(title, this.handler.bind(this));
   },
-  event(payload: GoogleEvent): void {
+  dispatchEvent(payload: GoogleEvent): void {
     const customEvent = new CustomEvent(
       title,
       {
@@ -101,7 +101,7 @@ const Metrics = ({
       urlParams['z'] = Date.now();
     }
 
-    this.sendEvent(Object.freeze(urlParams));
+    this.postEvent(Object.freeze(urlParams));
   },
   commandListener(): void {
     const filteredCommands: string[] = this.getCommands();
@@ -110,14 +110,14 @@ const Metrics = ({
       log(`${title}: Adding event listener for command:`, command);
 
       window.addEventListener(command, () => {
-        this.event({
+        this.dispatchEvent({
           category: this.options.commandCategory,
           action: command
         });
       });
     });
   },
-  async sendEvent(urlParams: GoogleUrlParams): Promise<void> {
+  async postEvent(urlParams: GoogleUrlParams): Promise<void> {
     const urlParamsEncoded = queryString.stringify(urlParams);
     const requestURL = `https://www.google-analytics.com/collect?${urlParamsEncoded}`;
 
