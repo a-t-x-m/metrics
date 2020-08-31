@@ -1,11 +1,10 @@
 'use strict';
 
-import { createHash } from 'crypto';
 import { log } from '@atxm/developer-console';
 import { mac } from 'address';
 import { promisify } from 'util';
 import { sep as pathSeparator } from 'path';
-import { v4 as uuid } from 'uuid';
+import { v4 as uuidv4, v5 as uuidv5} from 'uuid';
 import callerCallsite from 'caller-callsite';
 import queryString from 'query-string';
 
@@ -151,12 +150,8 @@ const Metrics = ({
     const macAddress = await getMAC() || null;
 
     const clientID: string = macAddress
-      ? createHash('sha1')
-        .update(macAddress, 'utf8')
-        .digest('hex')
-        .toString()
-
-      : uuid();
+      ? uuidv5(macAddress, this.getNamespace())
+      : uuidv4();
 
     if (macAddress) {
       log(`${title}: Created client ID '${clientID}' from MAC address`);
@@ -165,6 +160,9 @@ const Metrics = ({
     }
 
     return clientID;
+  },
+  getNamespace(): string {
+    return uuidv5('https://www.npmjs.com/package/@atxm/metrics', uuidv5.URL);
   },
   getPackageName(): string {
     const callerPath: string = callerCallsite().getFileName();
