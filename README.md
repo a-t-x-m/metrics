@@ -62,56 +62,63 @@ Dispatches an event to Google Analystics
 
 #### cacheBuster
 
-Type: `boolean`
-Default: `false`
+Type: `boolean`  
+Default: `false`  
 
 Used to send a random number in GET requests to ensure browsers and proxies don't cache hits.
 
 #### commandCategory
 
-Type: `string`
-Default: `Package Command`
+Type: `string`  
+Default: `Package Command`  
 
 Default event category for package commands.
 
 #### commandTracking
 
-Type: `boolean`
-Default: `true`
+Type: `boolean`  
+Default: `true`  
 
 Sends an event to Google Analystics whenever a command provided by your package is invoked.
 
 #### consentSetting
 
-Type: `string`
+Type: `string`  
 
 Specifies a package setting in which the user can deny tracking, e.g. in compliance with the [GDPR][gdpr] or the [CCPA][ccpa].
 
 #### dryRun
 
-Type: `boolean`
-Default: `false`
+Type: `boolean`  
+Default: `false`  
 
 Skips sending the actual request to Google Analytics.
 
+#### ipOverride
+
+Type: `boolean|string`  
+Default: `false`  
+
+Allows overriding the user IP address. Uses `127.0.0.1` when `true`.
+
 #### muted
 
-Type: `boolean`
-Default: `false`
+Type: `boolean`  
+Default: `false`  
 
 Skips adding event listeners when the module is initialized.
 
 #### trackDevMode
 
-Type: `boolean`
-Default: `false`
+Type: `boolean`  
+Default: `false`  
 
 Enables tracking if the current window is in development mode.
 
 #### trackSpecMode
 
-Type: `boolean`
-Default: `false`
+Type: `boolean`  
+Default: `false`  
 
 Enables tracking if current window is running specs.
 

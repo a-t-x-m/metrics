@@ -6,6 +6,7 @@ import { promisify } from 'util';
 import { sep as pathSeparator } from 'path';
 import { v4 as uuidv4, v5 as uuidv5} from 'uuid';
 import callerCallsite from 'caller-callsite';
+import ipRegex from 'ip-regex';
 import queryString from 'query-string';
 
 const getMAC = promisify(mac);
@@ -18,6 +19,7 @@ const Metrics = ({
   options: {
     commandTracking: true,
     commandCategory: 'Package Command',
+    ipOverride: false
   },
   init(trackingID: string, options: MetricsOptions = {}): Promise<void> {
     this.options = { ...this.options, ...options };
@@ -91,6 +93,10 @@ const Metrics = ({
       urlParams['ev'] = value.trim();
     }
 
+    if (this.options.ipOverride) {
+      urlParams['uip'] = this.getIP();
+    }
+
     if (this.options.cacheBuster) {
       urlParams['z'] = Date.now();
     }
@@ -160,6 +166,11 @@ const Metrics = ({
     }
 
     return clientID;
+  },
+  getIP(): string {
+    return ipRegex({exact: true}).test(this.options.ipOverride) || ipRegex.v6({exact: true}).test(this.options.ipOverride)
+      ? this.options.ipOverride
+      : '127.0.0.1';
   },
   getNamespace(): string {
     return uuidv5('https://www.npmjs.com/package/@atxm/metrics', uuidv5.URL);
