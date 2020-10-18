@@ -5,6 +5,8 @@ import {
   dispatchEvent,
   getClientID,
   getIP,
+  getUserAgent,
+  getWindowDimensions,
   isValidConfig,
   post,
   title
@@ -13,12 +15,12 @@ import {
 const GA = ({
   clientID: '',
   trackingID: '',
+  trackerURL: 'https://www.google-analytics.com/collect',
   options: {
     commandTracking: true,
     commandCategory: 'Package Command',
     ipOverride: false
   },
-  postURL: 'https://www.google-analytics.com/collect',
 
   async init(trackingID: string, options: MetricsOptions = {}): Promise<void> {
     this.options = { ...this.options, ...options };
@@ -58,7 +60,7 @@ const GA = ({
     const { category, action, label, value } = detail;
     const defaultParams = await this.defaultParams();
 
-    const urlParams = {
+    const urlParams: GoogleUrlParams = {
       ...defaultParams,
       ec: category.trim(),
       ea: action.trim()
@@ -81,7 +83,7 @@ const GA = ({
     }
 
     post(
-      this.postURL,
+      this.trackerURL,
       Object.freeze(urlParams),
       this.options.dryRun
     );
@@ -93,18 +95,18 @@ const GA = ({
     }
 
     return Object.freeze({
-      aip: '1',
+      aip: 1,
       cid: this.clientID,
       ds: 'app',
       t: 'event',
       tid: this.trackingID,
-      ua: `${atom.getAppName()} v${atom.getVersion()} (${atom.getReleaseChannel()})`,
-      v: '1',
-      vp: `${atom.getWindowDimensions().width}x${atom.getWindowDimensions().height}`
+      ua: getUserAgent(),
+      v: 1,
+      vp: getWindowDimensions()
     });
   },
 
-  dispatchEvent(payload: GoogleEvent): void {
+  dispatchEvent(payload: MetricsEvent): void {
     dispatchEvent(payload)
   }
 });

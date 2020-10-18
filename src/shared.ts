@@ -25,7 +25,7 @@ async function addCommandListener(options: MetricsOptions): Promise<void> {
   });
 }
 
-function dispatchEvent(payload: GoogleEvent): void {
+function dispatchEvent(payload: MetricsEvent): void {
   const customEvent = new CustomEvent(
     title,
     {
@@ -96,6 +96,14 @@ async function getPackageName(): Promise<string> {
   return uuidv4();
 }
 
+function getUserAgent(): string {
+  return `${atom.getAppName()} v${atom.getVersion()} (${atom.getReleaseChannel()})`;
+}
+
+function getWindowDimensions(): string {
+  return `${atom.getWindowDimensions().width}x${atom.getWindowDimensions().height}`;
+}
+
 function isValidConfig(options: MetricsOptions): boolean {
   if (options.consentSetting?.length && atom.config.get(options.consentSetting) !== true) {
     log(`${title}: No consent given by the user, aborting tracking`);
@@ -136,6 +144,8 @@ export {
   getIP,
   getNamespace,
   getPackageName,
+  getUserAgent,
+  getWindowDimensions,
   isValidConfig,
   post,
   title
