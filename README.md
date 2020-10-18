@@ -40,7 +40,7 @@ export async function activate() {
 
 Usage: `init(trackingID: string, options: object)`
 
-Initializes module adds event listeners, unless [`option.muted`](#muted) is used
+Initializes module, unless [`option.muted`](#muted) is used
 
 #### listen
 
