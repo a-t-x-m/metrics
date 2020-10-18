@@ -31,6 +31,7 @@
     "@atxm/developer-console": "^0.3.0",
     "address": "^1.1.2",
     "caller-callsite": "^4.1.0",
+    "hasha": "^5.2.2",
     "ip-regex": "^4.1.0",
     "query-string": "^6.13.1",
     "uuid": "^8.3.0"
