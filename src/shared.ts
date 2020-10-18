@@ -90,7 +90,7 @@ async function getPackageName(): Promise<string> {
     return callerPath
       .replace(intersection[0], '')
       .split(pathSeparator)
-      .filter(fragment => fragment)[0];
+      .filter(fragment => fragment)[0] || uuidv4();
   }
 
   return uuidv4();
