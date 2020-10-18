@@ -5,7 +5,7 @@
 [![CircleCI](https://flat.badgen.net/circleci/github/a-t-x-m/metrics)](https://circleci.com/gh/a-t-x-m/metrics)
 [![David](https://flat.badgen.net/david/dep/a-t-x-m/metrics)](https://david-dm.org/a-t-x-m/metrics)
 
-Google Analytics event tracking for Atom packages
+Event tracking for your Atom packages made easy. Supports Google Analytics and Matomo.
 
 ## Installation
 
@@ -15,15 +15,17 @@ Google Analytics event tracking for Atom packages
 
 Tracking of commands provided by your package is enabled by default. Additionally, custom events can be fired from anywhere in your package.
 
+Keep in mind that you need to initialize the metrics provider *after* adding your Atom commands!
+
 **Example:**
 
 ```js
-import Metrics from '@atxm/metrics';
+import { GA } from '@atxm/metrics';
 
 export async function activate() {
-    Metrics.init('UA-XXXX-Y');
+    await GA.init('UA-XXXX-Y');
 
-    Metrics.dispatchEvent({
+    GA.dispatchEvent({
       category: 'Demo',
       action: 'Package activated!'
     });
@@ -79,7 +81,7 @@ Default event category for package commands.
 Type: `boolean`  
 Default: `true`  
 
-Dispatches an event to Google Analystics whenever a command provided by your package is invoked.
+Dispatches an event to Google Analystics whenever a command provided by your package is invoked. Requires the metrics provider to initialize after your commands were added!
 
 #### consentSetting
 
@@ -121,6 +123,10 @@ Type: `boolean`
 Default: `false`  
 
 Enables tracking if current window is running specs.
+
+### Debugging
+
+Running Atom in developer mode will log useful message to the console.
 
 ## License
 

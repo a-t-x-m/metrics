@@ -5,6 +5,7 @@ interface MetricsOptions {
   consentSetting?: string;
   dryRun?: boolean;
   muted?: boolean;
+  ipOverride?: string;
   trackDevMode?: boolean;
   trackSpecMode?: boolean;
 }
