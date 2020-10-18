@@ -10,7 +10,7 @@ interface MetricsOptions {
   trackSpecMode?: boolean;
 }
 
-interface GoogleEvent {
+interface MetricsEvent {
   category: string;
   action: string;
   label?: string;
@@ -18,12 +18,31 @@ interface GoogleEvent {
 }
 
 interface GoogleUrlParams {
-  aip: string;
-  cid: string;
-  ds: string;
-  t: string;
-  tid: string;
+  aip?: number | string;
+  cid?: string;
+  ds?: string;
+  ea?: string;
+  ec?: string;
+  el?: string;
+  ev?: string;
+  t?: string;
+  tid?: string;
+  ua?: string;
+  uip?: string;
+  v?: number | string;
+  vp?: string;
+  z?: number;
+}
+
+interface MatomoUrlParams {
+  _id: string;
+  apiv: number | string;
+  e_a?: string;
+  e_c?: string;
+  e_l?: string;
+  e_v?: string;
+  idsite: string;
+  rec: number | string;
+  res: string;
   ua: string;
-  v: string;
-  vp: string;
 }
