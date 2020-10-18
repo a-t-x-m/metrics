@@ -5,7 +5,6 @@ import { sep as pathSeparator } from 'path';
 import { v4 as uuidv4, v5 as uuidv5} from 'uuid';
 import callerCallsite from 'caller-callsite';
 import ipRegex from 'ip-regex';
-import readPkgUp from 'read-pkg-up';
 import queryString from 'query-string';
 
 const getMAC = promisify(mac);
@@ -60,7 +59,7 @@ async function getCommands(): Promise<string[]> {
   // @ts-ignore
   const registeredCommands: string[] = Object.keys(atom.commands.registeredCommands);
 
-  return registeredCommands.filter(registeredCommand => registeredCommand.startsWith(`${packageName}:`));
+  return registeredCommands.filter(registeredCommand => packageName && registeredCommand.startsWith(`${packageName}:`));
 }
 
 function getIP(options: MetricsOptions): string {
@@ -91,12 +90,10 @@ async function getPackageName(): Promise<string> {
     return callerPath
       .replace(intersection[0], '')
       .split(pathSeparator)
-      .filter(fragment => fragment)[0] || '';
+      .filter(fragment => fragment)[0];
   }
 
-  console.log('readPkgUp', await readPkgUp())
-
-  return ''; //(await readPkgUp())['packageJson']['name'];
+  return uuidv4();
 }
 
 function isValidConfig(options: MetricsOptions): boolean {
