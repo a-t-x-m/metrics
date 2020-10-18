@@ -10,7 +10,8 @@ const external = [
   'path',
   'os',
   'url',
-  'util'
+  'util',
+  'worker_threads'
 ];
 
 const plugins = [
