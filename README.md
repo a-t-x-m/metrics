@@ -46,7 +46,7 @@ import { Matomo } from '@atxm/metrics';
 
 export async function activate() {
   // Initialize provider
-  const trackingUrl = 'https//:url.to/matomo.php';
+  const trackingUrl = 'https://url.to/matomo.php';
   const siteId = '123';
   await Matomo.init(trackingUrl, siteId)
 
