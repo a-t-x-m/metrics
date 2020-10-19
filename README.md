@@ -46,6 +46,7 @@ import { Analytics as GA, Matomo } from '@atxm/metrics';
 
 await GA.init('UA-XXXX-Y');
 ```
+</details>
 
 <details>
 <summary><strong>Matomo</strong></summary>
@@ -58,8 +59,6 @@ const siteId = '123';
 
 await Matomo.init(trackingUrl, siteId)
 ```
-
-**Note:** The `%path%` placeholder can be omitted when it's the last argument
 </details>
 
 #### init
