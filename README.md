@@ -67,8 +67,8 @@ await Matomo.init(trackingUrl, siteId)
 
 #### init
 
-Usage for Analytics: `init(trackingID: string, options: object)`
-Usage for Matomo: `init(trackingURL: string, siteID: string, options: object)`
+Usage for Analytics: `init(trackingID: string, options: object)`  
+Usage for Matomo: `init(trackingURL: string, siteID: string, options: object)`  
 
 Initializes module, unless [`option.muted`](#muted) is used
 
