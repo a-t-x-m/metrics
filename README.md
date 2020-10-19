@@ -39,7 +39,9 @@ export async function activate() {
 This modules currently exposes two providers: Google Analytics and Matomo. Both share the same methods but differ in their initialization.
 
 <details>
-<summary><strong>Google Analytics</strong></summary>
+<summary><strong>Examples</strong></summary>
+
+#### Google Analytics
 
 ```ts
 import { Analytics as GA, Matomo } from '@atxm/metrics';
@@ -48,8 +50,7 @@ await GA.init('UA-XXXX-Y');
 ```
 </details>
 
-<details>
-<summary><strong>Matomo</strong></summary>
+#### Matomo
 
 ```ts
 import { Matomo } from '@atxm/metrics';
@@ -63,11 +64,9 @@ await Matomo.init(trackingUrl, siteId)
 
 ### Methods
 
-
-
 #### init
 
-Analytics: `init(trackingID: string, options: object)`  
+Google Analytics: `init(trackingID: string, options: object)`  
 Matomo: `init(trackingURL: string, siteID: string, options: object)`  
 
 Initializes module, unless [`option.muted`](#muted) is used
