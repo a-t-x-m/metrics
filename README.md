@@ -26,10 +26,10 @@ Keep in mind that you need to initialize the metrics provider *after* adding you
 import { Analytics as GA } from '@atxm/metrics';
 
 export async function activate() {
-  // Add package commands before initializing
-
+  // Initialize provider
   await GA.init('UA-XXXX-Y');
 
+  // Dispatch custom event
   GA.dispatchEvent({
     category: 'Demo',
     action: 'Package activated!'
@@ -45,13 +45,12 @@ export async function activate() {
 import { Matomo } from '@atxm/metrics';
 
 export async function activate() {
-  // Add package commands before initializing
-
+  // Initialize provider
   const trackingUrl = 'https//:url.to/matomo.php';
   const siteId = '123';
-
   await Matomo.init(trackingUrl, siteId)
 
+  // Dispatch custom event
   Matomo.dispatchEvent({
     category: 'Demo',
     action: 'Package activated!'
