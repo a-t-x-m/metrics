@@ -17,7 +17,7 @@ interface MetricsEvent {
   value?: number;
 }
 
-interface GoogleUrlParams {
+interface GoogleUrlParams extends Record<string, string | number | boolean> {
   aip?: number | string;
   cid?: string;
   ds?: string;
@@ -34,7 +34,7 @@ interface GoogleUrlParams {
   z?: number;
 }
 
-interface MatomoUrlParams {
+interface MatomoUrlParams extends Record<string, string | number | boolean> {
   _id: string;
   apiv: number | string;
   e_a?: string;

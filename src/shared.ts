@@ -123,7 +123,7 @@ function isValidConfig(options: MetricsOptions): boolean {
   return true;
 }
 
-async function post(baseURL: string, urlParams: GoogleUrlParams, dryRun = false): Promise<void> {
+async function post(baseURL: string, urlParams: GoogleUrlParams | MatomoUrlParams, dryRun = false): Promise<void> {
   const urlParamsEncoded = queryString.stringify(urlParams);
   const requestURL = `${baseURL}?${urlParamsEncoded}`;
 
