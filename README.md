@@ -48,7 +48,6 @@ import { Analytics as GA, Matomo } from '@atxm/metrics';
 
 await GA.init('UA-XXXX-Y');
 ```
-</details>
 
 #### Matomo
 
