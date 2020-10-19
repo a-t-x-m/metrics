@@ -13,7 +13,7 @@ import {
   title
 } from '../shared'
 
-const self = '@atxm/metrics:GoogleAnalytics';
+const eventName = '@atxm/metrics:GoogleAnalytics';
 
 const GA = ({
   clientID: '',
@@ -39,20 +39,20 @@ const GA = ({
     }
 
     if (this.options.commandTracking) {
-      await addCommandListener(self, this.options);
+      await addCommandListener(eventName, this.options);
     }
   },
 
   listen(): void {
     log(`${title}: Adding event listener`);
 
-    window.addEventListener(self, this.handler.bind(this));
+    window.addEventListener(eventName, this.handler.bind(this));
   },
 
   mute(): void {
     log(`${title}: Removing event listener`);
 
-    window.removeEventListener(self, this.handler.bind(this));
+    window.removeEventListener(eventName, this.handler.bind(this));
   },
 
   async handler({ detail }: unknown): Promise<void> {
@@ -110,7 +110,7 @@ const GA = ({
   },
 
   dispatchEvent(payload: MetricsEvent): void {
-    dispatchEvent(self, payload)
+    dispatchEvent(eventName, payload)
   }
 });
 

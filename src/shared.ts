@@ -10,7 +10,7 @@ import queryString from 'query-string';
 const getMAC = promisify(mac);
 const title = '@atxm/metrics';
 
-async function addCommandListener(eventName, options: MetricsOptions): Promise<void> {
+async function addCommandListener(eventName: string, options: MetricsOptions): Promise<void> {
   const filteredCommands: string[] = await getCommands();
 
   atom.commands.onDidDispatch(event => {
@@ -25,7 +25,7 @@ async function addCommandListener(eventName, options: MetricsOptions): Promise<v
   });
 }
 
-function dispatchEvent(eventName, payload: MetricsEvent): void {
+function dispatchEvent(eventName: string, payload: MetricsEvent): void {
   const customEvent = new CustomEvent(
     eventName,
     {

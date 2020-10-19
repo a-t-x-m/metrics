@@ -12,7 +12,7 @@ import {
   title
 } from '../shared'
 
-const self = '@atxm/metrics:Matomo';
+const eventName = '@atxm/metrics:Matomo';
 
 const Matomo = ({
   clientID: '',
@@ -39,20 +39,20 @@ const Matomo = ({
     }
 
     if (this.options.commandTracking) {
-      await addCommandListener(self, this.options);
+      await addCommandListener(eventName, this.options);
     }
   },
 
   listen(): void {
     log(`${title}: Adding event listener`);
 
-    window.addEventListener(self, this.handler.bind(this));
+    window.addEventListener(eventName, this.handler.bind(this));
   },
 
   mute(): void {
     log(`${title}: Removing event listener`);
 
-    window.removeEventListener(self, this.handler.bind(this));
+    window.removeEventListener(eventName, this.handler.bind(this));
   },
 
   async handler({ detail }: unknown): Promise<void> {
@@ -102,7 +102,7 @@ const Matomo = ({
   },
 
   dispatchEvent(payload: MetricsEvent): void {
-    dispatchEvent(self, payload)
+    dispatchEvent(eventName, payload)
   }
 });
 
