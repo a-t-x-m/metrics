@@ -1,4 +1,5 @@
 import { log } from '@atxm/developer-console';
+import { basename, extname } from 'path';
 
 import {
   addCommandListener,
@@ -11,6 +12,8 @@ import {
   post,
   title
 } from '../shared'
+
+const self = '@atxm/metrics:GoogleAnalytics';
 
 const GA = ({
   clientID: '',
@@ -36,20 +39,20 @@ const GA = ({
     }
 
     if (this.options.commandTracking) {
-      await addCommandListener(this.options);
+      await addCommandListener(self, this.options);
     }
   },
 
   listen(): void {
     log(`${title}: Adding event listener`);
 
-    window.addEventListener(title, this.handler.bind(this));
+    window.addEventListener(self, this.handler.bind(this));
   },
 
   mute(): void {
     log(`${title}: Removing event listener`);
 
-    window.removeEventListener(title, this.handler.bind(this));
+    window.removeEventListener(self, this.handler.bind(this));
   },
 
   async handler({ detail }: unknown): Promise<void> {
@@ -107,7 +110,7 @@ const GA = ({
   },
 
   dispatchEvent(payload: MetricsEvent): void {
-    dispatchEvent(payload)
+    dispatchEvent(self, payload)
   }
 });
 

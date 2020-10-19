@@ -10,14 +10,14 @@ import queryString from 'query-string';
 const getMAC = promisify(mac);
 const title = '@atxm/metrics';
 
-async function addCommandListener(options: MetricsOptions): Promise<void> {
+async function addCommandListener(eventName, options: MetricsOptions): Promise<void> {
   const filteredCommands: string[] = await getCommands();
 
   atom.commands.onDidDispatch(event => {
     const command = event.type;
 
     if (filteredCommands.includes(command)) {
-      dispatchEvent({
+      dispatchEvent(eventName, {
         category: options.commandCategory,
         action: command
       });
@@ -25,9 +25,9 @@ async function addCommandListener(options: MetricsOptions): Promise<void> {
   });
 }
 
-function dispatchEvent(payload: MetricsEvent): void {
+function dispatchEvent(eventName, payload: MetricsEvent): void {
   const customEvent = new CustomEvent(
-    title,
+    eventName,
     {
       detail: payload
     }
@@ -130,9 +130,11 @@ async function post(baseURL: string, urlParams: GoogleUrlParams, dryRun = false)
   log(`${title}: Sending post request to ${requestURL}`);
 
   if (dryRun !== true) {
-    await window.fetch(requestURL, {
+    const response = await window.fetch(requestURL, {
       method: 'POST'
     });
+
+    log(response);
   }
 }
 

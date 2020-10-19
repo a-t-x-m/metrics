@@ -12,6 +12,8 @@ import {
   title
 } from '../shared'
 
+const self = '@atxm/metrics:Matomo';
+
 const Matomo = ({
   clientID: '',
   trackingID: '',
@@ -22,7 +24,7 @@ const Matomo = ({
     ipOverride: false
   },
 
-  async init(trackingID: string, trackerURL: string, options: MetricsOptions = {}): Promise<void> {
+  async init(trackerURL: string, trackingID: string, options: MetricsOptions = {}): Promise<void> {
     this.options = { ...this.options, ...options };
 
     if (!isValidConfig(this.options)) {
@@ -37,20 +39,20 @@ const Matomo = ({
     }
 
     if (this.options.commandTracking) {
-      await addCommandListener(this.options);
+      await addCommandListener(self, this.options);
     }
   },
 
   listen(): void {
     log(`${title}: Adding event listener`);
 
-    window.addEventListener(title, this.handler.bind(this));
+    window.addEventListener(self, this.handler.bind(this));
   },
 
   mute(): void {
     log(`${title}: Removing event listener`);
 
-    window.removeEventListener(title, this.handler.bind(this));
+    window.removeEventListener(self, this.handler.bind(this));
   },
 
   async handler({ detail }: unknown): Promise<void> {
@@ -85,7 +87,7 @@ const Matomo = ({
   async defaultParams(): Promise<MatomoUrlParams> {
     if (!this.clientID.length) {
       this.clientID = hasha(await getClientID(), {
-        algorithm: 'sha256'
+        algorithm: 'sha512'
       }).substring(0, 16);
     }
 
@@ -100,7 +102,7 @@ const Matomo = ({
   },
 
   dispatchEvent(payload: MetricsEvent): void {
-    dispatchEvent(payload)
+    dispatchEvent(self, payload)
   }
 });
 
