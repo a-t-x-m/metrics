@@ -20,7 +20,7 @@ Keep in mind that you need to initialize the metrics provider *after* adding you
 **Example:**
 
 ```js
-import { GA } from '@atxm/metrics';
+import { Analytics as GA } from '@atxm/metrics';
 
 export async function activate() {
     await GA.init('UA-XXXX-Y');
@@ -34,13 +34,41 @@ export async function activate() {
 
 **Note:** In order to make your Atom package compliant with the [GDPR][gdpr] or the [CCPA][ccpa], you need to provide a privacy policy and a [consent setting](#consentSetting)!
 
-### Methods
+### Providers
+
+This modules currently exposes two providers: Google Analytics and Matomo. Both share the same methods but differ in their initialization.
+
+<details>
+<summary><strong>Google Analytics</strong></summary>
+
+```ts
+import { Analytics as GA, Matomo } from '@atxm/metrics';
+
+await GA.init('UA-XXXX-Y');
+```
+
+<details>
+<summary><strong>Matomo</strong></summary>
+
+```ts
+import { Matomo } from '@atxm/metrics';
+
+const trackingUrl = 'https//:url.to/matomo.php';
+const siteId = '123';
+
+await Matomo.init(trackingUrl, siteId)
+```
+
+**Note:** The `%path%` placeholder can be omitted when it's the last argument
+</details>
 
 #### init
 
 Usage: `init(trackingID: string, options: object)`
 
 Initializes module, unless [`option.muted`](#muted) is used
+
+### Methods
 
 #### listen
 
