@@ -1,5 +1,4 @@
 import { log } from '@atxm/developer-console';
-import { basename, extname } from 'path';
 
 import {
   addCommandListener,
