@@ -21,6 +21,7 @@ Keep in mind that you need to initialize the metrics provider *after* adding you
 
 <details>
 <summary><strong>Google Analytics</strong></summary>
+
 ```js
 import { Analytics as GA } from '@atxm/metrics';
 
@@ -38,7 +39,7 @@ export async function activate() {
 <details>
 <summary><strong>Matomo</strong></summary>
 
-```ts
+```js
 import { Matomo } from '@atxm/metrics';
 
 const trackingUrl = 'https//:url.to/matomo.php';
