@@ -17,8 +17,10 @@ Tracking of commands provided by your package is enabled by default. Additionall
 
 Keep in mind that you need to initialize the metrics provider *after* adding your Atom commands!
 
-**Example:**
+**Examples:**
 
+<details>
+<summary><strong>Google Analytics</strong></summary>
 ```js
 import { Analytics as GA } from '@atxm/metrics';
 
@@ -31,25 +33,10 @@ export async function activate() {
     });
 };
 ```
-
-**Note:** In order to make your Atom package compliant with the [GDPR][gdpr] or the [CCPA][ccpa], you need to provide a privacy policy and a [consent setting](#consentSetting)!
-
-### Providers
-
-This modules currently exposes two providers: Google Analytics and Matomo. Both share the same methods but differ in their initialization.
+</details>
 
 <details>
-<summary><strong>Examples</strong></summary>
-
-#### Google Analytics
-
-```ts
-import { Analytics as GA, Matomo } from '@atxm/metrics';
-
-await GA.init('UA-XXXX-Y');
-```
-
-#### Matomo
+<summary><strong>Matomo</strong></summary>
 
 ```ts
 import { Matomo } from '@atxm/metrics';
@@ -60,6 +47,12 @@ const siteId = '123';
 await Matomo.init(trackingUrl, siteId)
 ```
 </details>
+
+**Note:** In order to make your Atom package compliant with the [GDPR][gdpr] or the [CCPA][ccpa], you need to provide a privacy policy and a [consent setting](#consentSetting)!
+
+### Providers
+
+This modules currently exposes two providers: Google Analytics and Matomo. Both share the same methods but differ in their initialization.
 
 ### Methods
 
