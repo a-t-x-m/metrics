@@ -14,7 +14,7 @@ import {
 
 const eventName = '@atxm/metrics:GoogleAnalytics';
 
-const GA = ({
+const Analytics = ({
   clientID: '',
   trackingID: '',
   trackerURL: 'https://www.google-analytics.com/collect',
@@ -114,5 +114,5 @@ const GA = ({
 });
 
 export {
-  GA
+  Analytics
 };
