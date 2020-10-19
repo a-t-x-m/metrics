@@ -134,7 +134,7 @@ async function post(baseURL: string, urlParams: GoogleUrlParams | MatomoUrlParam
       method: 'POST'
     });
 
-    log(response);
+    log(`${title}: Fetch response`, response);
   }
 }
 
