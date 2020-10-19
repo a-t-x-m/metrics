@@ -4,6 +4,7 @@ import { promisify } from 'util';
 import { sep as pathSeparator } from 'path';
 import { v4 as uuidv4, v5 as uuidv5} from 'uuid';
 import callerCallsite from 'caller-callsite';
+import hasha from 'hasha';
 import ipRegex from 'ip-regex';
 import queryString from 'query-string';
 
@@ -90,10 +91,16 @@ async function getPackageName(): Promise<string> {
     return callerPath
       .replace(intersection[0], '')
       .split(pathSeparator)
-      .filter(fragment => fragment)[0] || uuidv4();
+      .filter(fragment => fragment)[0] || 'pkg.' + await getShortHash(__filename, 8);
   }
 
-  return uuidv4();
+  return 'pkg.' + await getShortHash(__filename, 8);
+}
+
+async function getShortHash(inputString: string, length = 16): Promise<string> {
+  return (await hasha.async(inputString, {
+    algorithm: 'sha512'
+  })).substring(0, length);
 }
 
 function getUserAgent(): string {
@@ -146,6 +153,7 @@ export {
   getIP,
   getNamespace,
   getPackageName,
+  getShortHash,
   getUserAgent,
   getWindowDimensions,
   isValidConfig,

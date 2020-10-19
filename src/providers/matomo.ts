@@ -1,10 +1,10 @@
 import { log } from '@atxm/developer-console';
-import hasha from 'hasha';
 
 import {
   addCommandListener,
   dispatchEvent,
   getClientID,
+  getShortHash,
   getUserAgent,
   getWindowDimensions,
   isValidConfig,
@@ -86,9 +86,7 @@ const Matomo = ({
 
   async defaultParams(): Promise<MatomoUrlParams> {
     if (!this.clientID.length) {
-      this.clientID = hasha(await getClientID(), {
-        algorithm: 'sha512'
-      }).substring(0, 16);
+      this.clientID = await getShortHash(await getClientID());
     }
 
     return Object.freeze({
