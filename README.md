@@ -127,7 +127,7 @@ export async function activate() {
   // First, register commands
   subscriptions.add(
     atom.commands.add('atom-workspace', {
-      'demo:log-to-console': async () => {
+      'demo:log-to-console': () => {
         console.log('Demo time');
       }
     })
