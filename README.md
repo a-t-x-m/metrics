@@ -141,17 +141,6 @@ export async function activate() {
 ```
 </details>
 
-this.subscriptions = new CompositeDisposable();
-
-// Register commands
-this.subscriptions.add(
-  atom.commands.add('atom-workspace', {
-    'NSIS:command-reference': async () => {
-      // await compile(false, this.consolePanel)
-    }
-  })
-);
-
 #### consentSetting
 
 Type: `string`  
