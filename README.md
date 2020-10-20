@@ -26,7 +26,7 @@ Keep in mind that you need to initialize the metrics provider *after* adding you
 import { Analytics as GA } from '@atxm/metrics';
 
 export async function activate() {
-  // Initialize provider
+  // Initialize metrics provider
   await GA.init('UA-XXXX-Y');
 
   // Dispatch custom event
@@ -45,7 +45,7 @@ export async function activate() {
 import { Matomo } from '@atxm/metrics';
 
 export async function activate() {
-  // Initialize provider
+  // Initialize metrics provider
   const trackingUrl = 'https://url.to/matomo.php';
   const siteId = '123';
   await Matomo.init(trackingUrl, siteId)
@@ -116,6 +116,39 @@ Type: `boolean`
 Default: `true`  
 
 Dispatches an event to Google Analystics whenever a command provided by your package is invoked. Requires the metrics provider to initialize after your commands were added!
+
+<details>
+<summary><strong>Google Analytics</strong></summary>
+
+```js
+import { Analytics as GA } from '@atxm/metrics';
+
+export async function activate() {
+  // First, register commands
+  subscriptions.add(
+    atom.commands.add('atom-workspace', {
+      'demo:log-to-console': async () => {
+        console.log('Demo time');
+      }
+    })
+  );
+
+  // Next, initialize metrics provider
+  await GA.init('UA-XXXX-Y');
+};
+```
+</details>
+
+this.subscriptions = new CompositeDisposable();
+
+// Register commands
+this.subscriptions.add(
+  atom.commands.add('atom-workspace', {
+    'NSIS:command-reference': async () => {
+      // await compile(false, this.consolePanel)
+    }
+  })
+);
 
 #### consentSetting
 
