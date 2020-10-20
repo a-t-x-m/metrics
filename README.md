@@ -118,7 +118,7 @@ Default: `true`
 Dispatches an event to Google Analystics whenever a command provided by your package is invoked. Requires the metrics provider to initialize after your commands were added!
 
 <details>
-<summary><strong>Google Analytics</strong></summary>
+<summary><strong>Example</strong></summary>
 
 ```js
 import { Analytics as GA } from '@atxm/metrics';
