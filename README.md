@@ -134,7 +134,9 @@ export async function activate() {
   );
 
   // Next, initialize metrics provider
-  await GA.init('UA-XXXX-Y');
+  await GA.init('UA-XXXX-Y', {
+    commandTracking: true
+  });
 };
 ```
 </details>
