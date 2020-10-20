@@ -46,3 +46,8 @@ interface MatomoUrlParams extends Record<string, string | number | boolean> {
   res: string;
   ua: string;
 }
+
+interface ShortHashOptions {
+  algorithm?: 'sha1' | 'sha256' | 'sha512';
+  length?: number;
+}

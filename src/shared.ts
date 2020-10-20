@@ -91,16 +91,22 @@ async function getPackageName(): Promise<string> {
     return callerPath
       .replace(intersection[0], '')
       .split(pathSeparator)
-      .filter(fragment => fragment)[0] || 'pkg.' + await getShortHash(__filename, 8);
+      .filter(fragment => fragment)[0] || 'pkg.' + await getShortHash(__filename, { length: 8 });
   }
 
-  return 'pkg.' + await getShortHash(__filename, 8);
+  return 'pkg.' + await getShortHash(__filename, { length: 8 });
 }
 
-async function getShortHash(inputString: string, length = 16): Promise<string> {
+async function getShortHash(inputString: string, userOptions: ShortHashOptions = {}): Promise<string> {
+  const options = {
+    algorithm: 'sha256',
+    length: 16,
+    ...userOptions
+  };
+
   return (await hasha.async(inputString, {
-    algorithm: 'sha512'
-  })).substring(0, length);
+    algorithm: options.algorithm
+  })).substring(0, options.length);
 }
 
 function getUserAgent(): string {
