@@ -23,14 +23,14 @@ Keep in mind that you need to initialize the metrics provider *after* adding you
 <summary><strong>Google Analytics</strong></summary>
 
 ```js
-import { Analytics as GA } from '@atxm/metrics';
+import { Analytics as Metrics } from '@atxm/metrics';
 
 export async function activate() {
   // Initialize metrics provider
-  await GA.init('UA-XXXX-Y');
+  await Metrics.init('UA-XXXX-Y');
 
   // Dispatch custom event
-  GA.dispatchEvent({
+  Metrics.dispatchEvent({
     category: 'Demo',
     action: 'Package activated!'
   });
@@ -42,16 +42,16 @@ export async function activate() {
 <summary><strong>Matomo</strong></summary>
 
 ```js
-import { Matomo } from '@atxm/metrics';
+import { Matomo as Metrics } from '@atxm/metrics';
 
 export async function activate() {
   // Initialize metrics provider
   const trackingUrl = 'https://url.to/matomo.php';
   const siteId = '123';
-  await Matomo.init(trackingUrl, siteId)
+  await Metrics.init(trackingUrl, siteId)
 
   // Dispatch custom event
-  Matomo.dispatchEvent({
+  Metrics.dispatchEvent({
     category: 'Demo',
     action: 'Package activated!'
   });
@@ -121,7 +121,7 @@ Dispatches an event to Google Analystics whenever a command provided by your pac
 <summary><strong>Example</strong></summary>
 
 ```js
-import { Analytics as GA } from '@atxm/metrics';
+import { Analytics as Metrics } from '@atxm/metrics';
 
 export async function activate() {
   // First, register commands
@@ -134,7 +134,7 @@ export async function activate() {
   );
 
   // Next, initialize metrics provider
-  await GA.init('UA-XXXX-Y', {
+  await Metrics.init('UA-XXXX-Y', {
     commandTracking: true
   });
 };
