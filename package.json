@@ -6,7 +6,6 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "npm run start",
-    "fix": "eslint --fix ./src",
     "lint": "eslint ./src",
     "start": "rollup -w -c"
   },
