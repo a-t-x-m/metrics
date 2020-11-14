@@ -152,7 +152,7 @@ Specifies a package setting in which the user can deny tracking, e.g. in complia
 Type: `boolean`  
 Default: `false`  
 
-Skips sending the actual request to Google Analytics.
+Skips sending the actual data request.
 
 #### ipOverride
 
