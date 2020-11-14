@@ -15,6 +15,7 @@ tsconfig.tsbuildinfo
 tslint.json
 
 # Project-specific
+lib/*.map.js
 test.js
 test.ts
 todo.md

@@ -9,6 +9,7 @@ yarn-error.log
 yarn.lock
 
 # project specific
+lib/*.js.map
 test.js
 test.ts
 todo.md
