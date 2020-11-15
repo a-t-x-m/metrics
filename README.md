@@ -20,7 +20,7 @@ Keep in mind that you need to initialize the metrics provider *after* adding you
 **Examples:**
 
 <details>
-<summary><strong>Google Analytics</strong></summary>
+<summary>Google Analytics</summary>
 
 ```js
 import { Analytics as Metrics } from '@atxm/metrics';
@@ -39,7 +39,7 @@ export async function activate() {
 </details>
 
 <details>
-<summary><strong>Matomo</strong></summary>
+<summary>Matomo</summary>
 
 ```js
 import { Matomo as Metrics } from '@atxm/metrics';
