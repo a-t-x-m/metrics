@@ -24,15 +24,15 @@ const Matomo = ({
     ipOverride: false
   },
 
-  async init(trackerURL: string, trackingID: string, options: MetricsOptions = {}): Promise<void> {
+  async init(trackerURL: string, trackingID: string | number = 1, options: MetricsOptions = {}): Promise<void> {
     this.options = { ...this.options, ...options };
 
     if (!isValidConfig(this.options)) {
       return;
     }
 
-    this.trackingID = trackingID;
     this.trackerURL = trackerURL;
+    this.trackingID = String(trackingID);
 
     if (!this.options.muted) {
       this.listen();
