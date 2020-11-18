@@ -8,7 +8,7 @@
     "dev": "npm run start",
     "lint": "eslint ./src",
     "start": "rollup -w -c",
-    "test": "npm run test"
+    "test": "npm run lint"
   },
   "main": "./lib/index.js",
   "type": "module",
