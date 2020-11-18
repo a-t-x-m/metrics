@@ -12,7 +12,7 @@ import {
   title
 } from '../shared'
 
-const eventName = '@atxm/metrics:Matomo';
+const eventName = `${title}:Matomo`;
 
 const Matomo = ({
   clientID: '',

@@ -12,7 +12,7 @@ import {
   title
 } from '../shared'
 
-const eventName = '@atxm/metrics:GoogleAnalytics';
+const eventName = `${title}:GoogleAnalytics`;
 
 const Analytics = ({
   clientID: '',
