@@ -8,7 +8,7 @@ import {
   getUserAgent,
   getWindowDimensions,
   isValidConfig,
-  post,
+  postRequest,
   title
 } from '../shared'
 
@@ -84,7 +84,7 @@ const Analytics = ({
       urlParams['z'] = Date.now();
     }
 
-    post(
+    postRequest(
       this.trackerURL,
       Object.freeze(urlParams),
       this.options.dryRun

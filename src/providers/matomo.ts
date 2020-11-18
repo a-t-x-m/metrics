@@ -8,7 +8,7 @@ import {
   getUserAgent,
   getWindowDimensions,
   isValidConfig,
-  post,
+  postRequest,
   title
 } from '../shared'
 
@@ -77,7 +77,7 @@ const Matomo = ({
       urlParams['e_v'] = value.trim();
     }
 
-    post(
+    postRequest(
       this.trackerURL,
       Object.freeze(urlParams),
       this.options.dryRun
