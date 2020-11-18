@@ -70,7 +70,7 @@ This modules currently exposes two providers: Google Analytics and Matomo. Both 
 #### init
 
 Google Analytics: `init(trackingID: string, options: object)`  
-Matomo: `init(trackingURL: string, siteID: string, options: object)`  
+Matomo: `init(trackingURL: string, siteID: string | number = 1, options: object)`  
 
 Initializes module, unless [`option.muted`](#muted) is used
 
