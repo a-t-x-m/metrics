@@ -99,7 +99,7 @@ function getIP(options: MetricsOptions): string {
   }
 }
 
-async function getConfiguration() {
+async function getConfiguration(): Promise<string[]> {
   const packageName = await getPackageName();
   const config = atom.config.get(packageName);
 
