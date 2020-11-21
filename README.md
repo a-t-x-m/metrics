@@ -178,11 +178,7 @@ export async function activate() {
   );
 
   // Next, initialize metrics provider
-  await Metrics.init('UA-XXXXXX-Y', {
-    tracking: {
-      commands: true
-    }
-  });
+  await Metrics.init('UA-XXXXXX-Y');
 };
 ```
 </details>
