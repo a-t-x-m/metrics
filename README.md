@@ -190,7 +190,7 @@ Default: `true`
 
 Dispatches an event whenever the configuration for a package has been changed.
 
-**Note:** Configuration types `string` and `array` will be ignored for privacy reasons!
+**Note:** The configuration types `string` and `array` will be ignored for privacy reasons!
 
 #### trackInDevMode
 
