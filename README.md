@@ -13,7 +13,7 @@ Event tracking for your Atom packages made easy. Supports Google Analytics and M
 
 ## Usage
 
-Tracking of commands provided by your package is enabled by default. Additionally, custom events can be fired from anywhere in your package.
+Tracking of commands provided by your package and configuration changes is enabled by default. Additionally, custom events can be fired from anywhere in your package.
 
 Keep in mind that you need to initialize the metrics provider *after* adding your Atom commands!
 
