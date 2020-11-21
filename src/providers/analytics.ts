@@ -2,6 +2,7 @@ import { log } from '@atxm/developer-console';
 
 import {
   addCommandListener,
+  addConfigurationListener,
   dispatchEvent,
   getClientID,
   getIP,
@@ -19,13 +20,30 @@ const Analytics = ({
   trackingID: '',
   trackerURL: 'https://www.google-analytics.com/collect',
   options: {
-    commandTracking: true,
-    commandCategory: 'Package Command',
+    categories: {
+      commands: 'Atom Commands',
+      configuration: 'Atom Configuration'
+    },
+    tracking: {
+      commands: true,
+      configuration: true
+    },
     ipOverride: false
   },
 
   async init(trackingID: string, options: MetricsOptions = {}): Promise<void> {
-    this.options = { ...this.options, ...options };
+    this.options = {
+      ...this.options,
+      ...options,
+      categories: {
+        ...this.options.categories,
+        ...options.categories,
+      },
+      tracking: {
+        ...this.options.tracking,
+        ...options.tracking,
+      }
+    };
 
     if (!isValidConfig(this.options)) {
       return;
@@ -37,8 +55,12 @@ const Analytics = ({
       this.listen();
     }
 
-    if (this.options.commandTracking) {
+    if (this.options.tracking['commands']) {
       await addCommandListener(eventName, this.options);
+    }
+
+    if (this.options.tracking['configuration']) {
+      await addConfigurationListener(eventName, this.options);
     }
   },
 
@@ -68,11 +90,11 @@ const Analytics = ({
       ea: action.trim()
     };
 
-    if (label && label.trim().length) {
+    if (label?.trim().length) {
       urlParams['el'] = label.trim();
     }
 
-    if (value && value.trim().length) {
+    if (value?.trim().length) {
       urlParams['ev'] = value.trim();
     }
 

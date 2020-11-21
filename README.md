@@ -88,7 +88,7 @@ Removes event listener
 
 #### dispatchEvent
 
-Usage: `dispatchEvent({ category: string, action: string, label?: string, value?: number})`
+Usage: `dispatchEvent({ category: string, action: string, label?: string, value?: number })`
 
 Dispatches an event to Google Analystics
 
@@ -103,43 +103,23 @@ Used to send a random number in GET requests to ensure browsers and proxies don'
 
 **Note:** This option only works with Google Analytics
 
-#### commandCategory
+#### categories
 
-Type: `string`  
-Default: `Package Command`  
+Type: `object`  
 
-Default event category for package commands.
+#### categories.commands
 
-#### commandTracking
+Type: `string` 
+Default: `Package Commands`  
 
-Type: `boolean`  
-Default: `true`  
+Specifies event category name for package commands
 
-Dispatches an event to Google Analystics whenever a command provided by your package is invoked. Requires the metrics provider to initialize after your commands were added!
+#### categories.commands
 
-<details>
-<summary><strong>Example</strong></summary>
+Type: `string` 
+Default: `Package Configuration`  
 
-```js
-import { Analytics as Metrics } from '@atxm/metrics';
-
-export async function activate() {
-  // First, register commands
-  subscriptions.add(
-    atom.commands.add('atom-workspace', {
-      'demo:log-to-console': () => {
-        console.log('Demo time');
-      }
-    })
-  );
-
-  // Next, initialize metrics provider
-  await Metrics.init('UA-XXXX-Y', {
-    commandTracking: true
-  });
-};
-```
-</details>
+Specifies event category name for package configuration
 
 #### consentSetting
 
@@ -168,14 +148,60 @@ Default: `false`
 
 Skips adding event listeners when the module is initialized.
 
-#### trackDevMode
+#### tracking
+
+Type: `object`  
+
+Enables/disables automatic tracking
+
+#### tracking.commands
+
+Type: `boolean`  
+Default: `true`  
+
+Dispatches an event whenever a command provided by your package is invoked. Requires the metrics provider to initialize after your commands were added!
+
+<details>
+<summary><strong>Example</strong></summary>
+
+```js
+import { Analytics as Metrics } from '@atxm/metrics';
+
+export async function activate() {
+  // First, register commands
+  subscriptions.add(
+    atom.commands.add('atom-workspace', {
+      'demo:log-to-console': () => {
+        console.log('Demo time');
+      }
+    })
+  );
+
+  // Next, initialize metrics provider
+  await Metrics.init('UA-XXXX-Y', {
+    commandTracking: true
+  });
+};
+```
+</details>
+
+#### tracking.commands
+
+Type: `boolean`  
+Default: `true`  
+
+Dispatches an event whenever the configuration for a package has been changed.
+
+**Note:** Configuration types `string` and `array` will be ignored for privacy reasons!
+
+#### trackInDevMode
 
 Type: `boolean`  
 Default: `false`  
 
 Enables tracking if the current window is in development mode.
 
-#### trackSpecMode
+#### trackInSpecMode
 
 Type: `boolean`  
 Default: `false`  

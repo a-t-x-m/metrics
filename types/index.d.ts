@@ -1,20 +1,30 @@
+interface MetricsCategoriesOptions {
+  commands?: string;
+  configuration?: string;
+}
+
+interface MetricsTrackingOptions {
+  commands?: boolean;
+  configuration?: boolean;
+}
+
 interface MetricsOptions {
   cacheBuster?: boolean;
-  commandCategory?: string;
-  commandTracking?: boolean;
+  categories?: MetricsCategoriesOptions;
   consentSetting?: string;
   dryRun?: boolean;
   muted?: boolean;
   ipOverride?: string;
-  trackDevMode?: boolean;
-  trackSpecMode?: boolean;
+  tracking?: MetricsTrackingOptions;
+  trackInDevMode?: boolean;
+  trackInSpecMode?: boolean;
 }
 
 interface MetricsEvent {
   category: string;
   action: string;
   label?: string;
-  value?: number;
+  value?: string | number;
 }
 
 interface GoogleUrlParams extends Record<string, string | number | boolean> {

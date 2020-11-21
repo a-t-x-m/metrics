@@ -4,6 +4,7 @@ import { promisify } from 'util';
 import { sep as pathSeparator } from 'path';
 import { v4 as uuidv4, v5 as uuidv5} from 'uuid';
 import callerCallsite from 'caller-callsite';
+import dotObject from 'dot-object';
 import hasha from 'hasha';
 import ipRegex from 'ip-regex';
 import queryString from 'query-string';
@@ -19,10 +20,33 @@ async function addCommandListener(eventName: string, options: MetricsOptions): P
 
     if (filteredCommands.includes(command)) {
       dispatchEvent(eventName, {
-        category: options.commandCategory,
+        category: options.categories['commands'],
         action: command
       });
     }
+  });
+}
+
+async function addConfigurationListener(eventName: string, options: MetricsOptions): Promise<void> {
+  const packageName = await getPackageName();
+  const configuration: string[] = await getConfiguration();
+
+  configuration.map(configKey => {
+    const configName = `${packageName}.${configKey}`;
+
+    atom.config.onDidChange(configName, ({newValue}) => {
+      const configSchema: unknown = atom.config.getSchema(configName);
+
+      if (configSchema['type'] && (configSchema['type'] === 'string' || configSchema['type'] === 'array')) {
+        return;
+      }
+
+      dispatchEvent(eventName, {
+        category: options.categories['configuration'],
+        action: configName,
+        value: String(newValue)
+      });
+    });
   });
 }
 
@@ -75,6 +99,15 @@ function getIP(options: MetricsOptions): string {
   }
 }
 
+async function getConfiguration() {
+  const packageName = await getPackageName();
+  const config = atom.config.get(packageName);
+
+  dotObject.keepArray = true;
+
+  return Object.keys(dotObject.dot(config)) || [];
+}
+
 function getNamespace(): string {
   return uuidv5('https://www.npmjs.com/package/@atxm/metrics', uuidv5.URL);
 }
@@ -123,12 +156,12 @@ function isValidConfig(options: MetricsOptions): boolean {
     return false;
   }
 
-  if (atom.inDevMode() && options.trackDevMode !== true) {
+  if (atom.inDevMode() && options.trackInDevMode !== true) {
     log(`${title}: Tracking has not been enabled for Developer Mode, aborting`);
     return false;
   }
 
-  if (atom.inSpecMode() && !options.trackSpecMode !== true) {
+  if (atom.inSpecMode() && !options.trackInSpecMode !== true) {
     log(`${title}: Tracking has not been enabled for Spec Mode, aborting`);
     return false;
   }
@@ -151,11 +184,15 @@ async function postRequest(baseURL: string, urlParams: GoogleUrlParams | MatomoU
   }
 }
 
+window['getConfiguration'] = getConfiguration
+
 export {
   addCommandListener,
+  addConfigurationListener,
   dispatchEvent,
   getClientID,
   getCommands,
+  getConfiguration,
   getIP,
   getNamespace,
   getPackageName,
