@@ -183,7 +183,7 @@ export async function activate() {
 ```
 </details>
 
-#### tracking.commands
+#### tracking.configuration
 
 Type: `boolean`  
 Default: `true`  
