@@ -27,7 +27,7 @@ import { Analytics as Metrics } from '@atxm/metrics';
 
 export async function activate() {
   // Initialize metrics provider
-  await Metrics.init('UA-XXXX-Y');
+  await Metrics.init('UA-XXXXXX-Y');
 
   // Dispatch custom event
   Metrics.dispatchEvent({
