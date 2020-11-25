@@ -101,8 +101,6 @@ Default: `false`
 
 Used to send a random number in GET requests to ensure browsers and proxies don't cache hits.
 
-**Note:** This option only works with Google Analytics
-
 #### categories
 
 Type: `object`  
