@@ -134,7 +134,7 @@ Skips sending the actual data request.
 
 #### ipOverride
 
-Type: `boolean|string`  
+Type: `boolean | string`  
 Default: `false`  
 
 Allows overriding the user IP address. Uses `127.0.0.1` when `true`.
@@ -147,6 +147,13 @@ Type: `boolean`
 Default: `false`  
 
 Skips adding event listeners when the module is initialized.
+
+#### randomClientID
+
+Type: `boolean`  
+Default: `false`  
+
+Uses a random UUID as client ID for each tracking event.
 
 #### tracking
 
