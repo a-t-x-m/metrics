@@ -139,6 +139,8 @@ Default: `false`
 
 Allows overriding the user IP address. Uses `127.0.0.1` when `true`.
 
+**Note:** This option only works with Google Analytics
+
 #### muted
 
 Type: `boolean`  
