@@ -30,7 +30,6 @@ const Matomo = ({
       configuration: true
     },
     // Anonymization Options
-    ipOverride: false,
     randomClientID: false
   },
 
