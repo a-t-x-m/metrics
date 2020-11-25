@@ -2,7 +2,7 @@ import { log } from '@atxm/developer-console';
 import { mac } from 'address';
 import { promisify } from 'util';
 import { sep as pathSeparator } from 'path';
-import { v4 as uuidv4, v5 as uuidv5} from 'uuid';
+import { v4 as uuidV4, v5 as uuidV5} from 'uuid';
 import callerCallsite from 'caller-callsite';
 import dotObject from 'dot-object';
 import hasha from 'hasha';
@@ -63,12 +63,14 @@ function dispatchEvent(eventName: string, payload: MetricsEvent): void {
   window.dispatchEvent(customEvent);
 }
 
-async function getClientID(): Promise<string> {
-  const macAddress = await getMAC() || null;
+async function getClientID(randomID = false): Promise<string> {
+  const macAddress = randomID
+    ? null
+    : getMAC() || null;
 
   const clientID: string = macAddress
-    ? uuidv5(macAddress, getNamespace())
-    : uuidv4();
+    ? uuidV5(macAddress, getNamespace())
+    : uuidV4();
 
   if (macAddress) {
     log(`${title}: Created client ID '${clientID}' from MAC address`);
@@ -109,7 +111,7 @@ async function getConfiguration(): Promise<string[]> {
 }
 
 function getNamespace(): string {
-  return uuidv5('https://www.npmjs.com/package/@atxm/metrics', uuidv5.URL);
+  return uuidV5('https://www.npmjs.com/package/@atxm/metrics', uuidV5.URL);
 }
 
 async function getPackageName(): Promise<string> {

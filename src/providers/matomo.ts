@@ -1,4 +1,5 @@
 import { log } from '@atxm/developer-console';
+import { v4 as uuidV4} from 'uuid';
 
 import {
   addCommandListener,
@@ -28,7 +29,9 @@ const Matomo = ({
       commands: true,
       configuration: true
     },
-    ipOverride: false
+    // Anonymization Options
+    ipOverride: false,
+    randomClientID: false
   },
 
   async init(trackerURL: string, trackingID: string | number = 1, options: MetricsOptions = {}): Promise<void> {
@@ -99,6 +102,10 @@ const Matomo = ({
       urlParams['e_v'] = value.trim();
     }
 
+    if (this.options.cacheBuster) {
+      urlParams['rand'] = uuidV4();
+    }
+
     postRequest(
       this.trackerURL,
       Object.freeze(urlParams),
@@ -108,7 +115,7 @@ const Matomo = ({
 
   async defaultParams(): Promise<MatomoUrlParams> {
     if (!this.clientID.length) {
-      this.clientID = await getShortHash(await getClientID());
+      this.clientID = await getShortHash(await getClientID(this.randomClientID));
     }
 
     return Object.freeze({

@@ -28,7 +28,10 @@ const Analytics = ({
       commands: true,
       configuration: true
     },
-    ipOverride: false
+
+    // Anonymization Options
+    ipOverride: false,
+    randomClientID: false
   },
 
   async init(trackingID: string, options: MetricsOptions = {}): Promise<void> {
@@ -115,7 +118,7 @@ const Analytics = ({
 
   async defaultParams(): Promise<GoogleUrlParams> {
     if (!this.clientID.length) {
-      this.clientID = await getClientID();
+      this.clientID = await getClientID(this.randomClientID);
     }
 
     return Object.freeze({
