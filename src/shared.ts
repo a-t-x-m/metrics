@@ -66,10 +66,10 @@ function dispatchEvent(eventName: string, payload: MetricsEvent): void {
 async function getClientID(randomID = false): Promise<string> {
   const macAddress = randomID
     ? null
-    : getMAC() || null;
+    : await getMAC() || null;
 
   const clientID: string = macAddress
-    ? uuidV5(macAddress, getNamespace())
+    ? uuidFromString(macAddress)
     : uuidV4();
 
   if (macAddress) {
@@ -111,7 +111,7 @@ async function getConfiguration(): Promise<string[]> {
 }
 
 function getNamespace(): string {
-  return uuidV5('https://www.npmjs.com/package/@atxm/metrics', uuidV5.URL);
+  return uuidFromString('https://www.npmjs.com/package/@atxm/metrics');
 }
 
 async function getPackageName(): Promise<string> {
@@ -186,7 +186,9 @@ async function postRequest(baseURL: string, urlParams: GoogleUrlParams | MatomoU
   }
 }
 
-window['getConfiguration'] = getConfiguration
+function uuidFromString(inputString: string): string {
+  return uuidV5(inputString, getNamespace());
+}
 
 export {
   addCommandListener,
@@ -200,6 +202,7 @@ export {
   getPackageName,
   getShortHash,
   getUserAgent,
+  uuidFromString,
   getWindowDimensions,
   isValidConfig,
   postRequest,
