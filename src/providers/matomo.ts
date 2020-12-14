@@ -1,4 +1,5 @@
 import { log } from '@atxm/developer-console';
+import { uuidFromString } from '../shared';
 import { v4 as uuidV4} from 'uuid';
 
 import {
@@ -14,7 +15,7 @@ import {
   title
 } from '../shared'
 
-const eventName = `${title}:Matomo`;
+const eventName = uuidFromString(`${title}:Matomo`);
 
 const Matomo = ({
   clientID: '',
