@@ -1,6 +1,6 @@
 {
   "name": "@atxm/metrics",
-  "version": "0.13.0",
+  "version": "0.13.1",
   "description": "Event tracking for your Atom packages made easy",
   "license": "MIT OR GPL-2.0",
   "scripts": {
