@@ -5,7 +5,7 @@ import { v4 as uuidV4} from 'uuid';
 import {
   addCommandListener,
   addConfigurationListener,
-  dispatchEvent,
+  emit,
   getClientID,
   getShortHash,
   getUserAgent,
@@ -128,8 +128,8 @@ const Matomo = ({
     });
   },
 
-  dispatchEvent(payload: MetricsEvent): void {
-    dispatchEvent(eventName, payload)
+  emit(payload: MetricsEvent): void {
+    emit(eventName, payload)
   }
 });
 

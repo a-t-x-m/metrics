@@ -30,7 +30,7 @@ export async function activate() {
   await Metrics.init('UA-XXXXXX-Y');
 
   // Dispatch custom event
-  Metrics.dispatchEvent({
+  Metrics.emit({
     category: 'Demo',
     action: 'Package activated!'
   });
@@ -51,7 +51,7 @@ export async function activate() {
   await Metrics.init(trackingUrl, siteId)
 
   // Dispatch custom event
-  Metrics.dispatchEvent({
+  Metrics.emit({
     category: 'Demo',
     action: 'Package activated!'
   });
@@ -86,9 +86,9 @@ Usage: `mute()`
 
 Removes event listener
 
-#### dispatchEvent
+#### emit
 
-Usage: `dispatchEvent({ category: string, action: string, label?: string, value?: number })`
+Usage: `emit({ category: string, action: string, label?: string, value?: number })`
 
 Dispatches an event to Google Analystics
 

@@ -19,7 +19,7 @@ async function addCommandListener(eventName: string, options: MetricsOptions): P
     const command = event.type;
 
     if (filteredCommands.includes(command)) {
-      dispatchEvent(eventName, {
+      emit(eventName, {
         category: options.categories['commands'],
         action: command
       });
@@ -41,7 +41,7 @@ async function addConfigurationListener(eventName: string, options: MetricsOptio
         return;
       }
 
-      dispatchEvent(eventName, {
+      emit(eventName, {
         category: options.categories['configuration'],
         action: configName,
         value: String(newValue)
@@ -50,7 +50,7 @@ async function addConfigurationListener(eventName: string, options: MetricsOptio
   });
 }
 
-function dispatchEvent(eventName: string, payload: MetricsEvent): void {
+function emit(eventName: string, payload: MetricsEvent): void {
   const customEvent = new CustomEvent(
     eventName,
     {
@@ -61,6 +61,12 @@ function dispatchEvent(eventName: string, payload: MetricsEvent): void {
   log(`${title}: Dispatching event`, payload);
 
   window.dispatchEvent(customEvent);
+}
+
+function dispatchEvent(eventName: string, payload: MetricsEvent): void {
+  console.warn('dispatchEvent() has been deprecated in favour of emit(), please update your code accordingly');
+
+  emit(eventName, payload);
 }
 
 async function getClientID(randomID = false): Promise<string> {
@@ -194,6 +200,7 @@ export {
   addCommandListener,
   addConfigurationListener,
   dispatchEvent,
+  emit,
   getClientID,
   getCommands,
   getConfiguration,

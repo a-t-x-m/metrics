@@ -4,7 +4,7 @@ import { uuidFromString } from '../shared';
 import {
   addCommandListener,
   addConfigurationListener,
-  dispatchEvent,
+  emit,
   getClientID,
   getIP,
   getUserAgent,
@@ -134,8 +134,8 @@ const Analytics = ({
     });
   },
 
-  dispatchEvent(payload: MetricsEvent): void {
-    dispatchEvent(eventName, payload)
+  emit(payload: MetricsEvent): void {
+    emit(eventName, payload)
   }
 });
 
