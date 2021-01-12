@@ -1,5 +1,5 @@
+import { getShortHash } from '../shared';
 import { log } from '@atxm/developer-console';
-import { uuidFromString } from '../shared';
 
 import {
   addCommandListener,
@@ -14,7 +14,7 @@ import {
   title
 } from '../shared'
 
-const eventName = uuidFromString(`${title}:GoogleAnalytics`);
+const eventName = `${title}/GoogleAnalytics:${getShortHash()}`;
 
 const Analytics = ({
   clientID: '',

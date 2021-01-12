@@ -138,12 +138,16 @@ async function getPackageName(): Promise<string> {
   return 'pkg.' + await getShortHash(__filename, { length: 8 });
 }
 
-async function getShortHash(inputString: string, userOptions: ShortHashOptions = {}): Promise<string> {
+async function getShortHash(inputString = '', userOptions: ShortHashOptions = {}): Promise<string> {
   const options = {
     algorithm: 'sha256',
     length: 16,
     ...userOptions
   };
+
+  inputString = inputString?.length && typeof inputString === 'string'
+    ? inputString
+    : uuidV4();
 
   return (await hasha.async(inputString, {
     algorithm: options.algorithm

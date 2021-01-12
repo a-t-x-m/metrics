@@ -1,6 +1,5 @@
 import { log } from '@atxm/developer-console';
-import { uuidFromString } from '../shared';
-import { v4 as uuidV4} from 'uuid';
+import { v4 as uuidV4 } from 'uuid';
 
 import {
   addCommandListener,
@@ -15,7 +14,7 @@ import {
   title
 } from '../shared'
 
-const eventName = uuidFromString(`${title}:Matomo`);
+const eventName = `${title}/Matomo:${getShortHash()}`;
 
 const Matomo = ({
   clientID: '',
