@@ -64,7 +64,7 @@ function emit(eventName: string, payload: MetricsEvent): void {
 }
 
 function dispatchEvent(eventName: string, payload: MetricsEvent): void {
-  console.warn('dispatchEvent() has been deprecated in favour of emit(), please update your code accordingly');
+  console.warn('dispatchEvent() has been deprecated in favour of emit() and will be removed in the near future');
 
   emit(eventName, payload);
 }
