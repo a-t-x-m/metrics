@@ -107,14 +107,14 @@ Type: `object`
 
 #### categories.commands
 
-Type: `string` 
+Type: `string`  
 Default: `Package Commands`  
 
 Specifies event category name for package commands
 
-#### categories.commands
+#### categories.configuration
 
-Type: `string` 
+Type: `string`  
 Default: `Package Configuration`  
 
 Specifies event category name for package configuration
