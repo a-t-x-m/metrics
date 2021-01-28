@@ -189,18 +189,18 @@ async function postRequest(baseURL: string, urlParams: GoogleUrlParams | MatomoU
 
   if (dryRun) return;
 
-  let response;
-
   if (navigator.sendBeacon) {
-    navigator.sendBeacon(requestURL);
+    const returnValue = navigator.sendBeacon(requestURL);
+
+    log(`${title}: sendBeacon`, returnValue ? 'succeeded' : 'failed');
   } else {
-    response = await window.fetch(requestURL, {
+    const response = await window.fetch(requestURL, {
       method: 'POST',
       keepalive: true
     });
-  }
 
-  log(`${title}: Fetch response`, response);
+    log(`${title}: Fetch response`, response);
+  }
 }
 
 function uuidFromString(inputString: string): string {
