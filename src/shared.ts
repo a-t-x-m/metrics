@@ -117,7 +117,7 @@ async function getConfiguration(): Promise<string[]> {
 }
 
 function getNamespace(): string {
-  return 'https://www.npmjs.com/package/@atxm/metrics';
+  return uuidV5('https://www.npmjs.com/package/@atxm/metrics', uuidV5.URL);
 }
 
 async function getPackageName(): Promise<string> {
